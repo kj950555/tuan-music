@@ -1,18 +1,124 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="showon-top"></div>
+    <van-nav-bar title="个性推荐">
+      <template #right>
+        <van-icon name="search" size="18" color="#fff" />
+      </template>
+      <template #left>
+        <van-icon name="bars" size="18" color="#fff" />
+      </template>
+    </van-nav-bar>
+
+    <div class="title">热门推荐</div>
+    <div class="slideshow">
+      <van-swipe @change="onChange" :autoplay="3000">
+        <van-swipe-item v-for="(inet,index) in hotSlideshow" :key="index">
+          <img class="img-scale" :src="inet.imageUrl+'?param=420y200'" alt />
+          <!-- <div class=""></div> -->
+        </van-swipe-item>
+        <template #indicator>
+          <Indicator :coord="coord" />
+        </template>
+      </van-swipe>
+    </div>
+    <div class="title">推荐歌单</div>
+    <div class="everyday">
+      <Card v-for="(imen,index) in discover" :key="index" />
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Indicator from "../components/Indicator";
+import Card from "../components/Card";
 export default {
-  name: 'Home',
+  data() {
+    return {
+      hotSlideshow: [],
+      coord: "",
+      discover:[]
+    };
+  },
+  created() {
+    // 获取轮播图资源
+    this.Slideshow();
+    // 获取发现
+    this.getDiscover();
+  },
   components: {
-    HelloWorld
+    // 注册组件
+    Indicator,
+    Card,
+  },
+  methods: {
+    // 获取轮播图资源
+    async Slideshow() {
+      const { data: res } = await this.$http.get("/banner");
+      if (res.code !== 200) {
+        return this.$notify({
+          type: "primary",
+          message: "通知内容",
+        });
+      }
+      this.hotSlideshow = res.banners;
+      console.log("热门歌曲", this.hotSlideshow);
+    },
+    async getDiscover() {
+      const { data: res } = await this.$http.get("/personalized?limit=5");
+      if (res.code !== 200) {
+        return this.$notify({
+          type: "primary",
+          message: "通知内容",
+        });
+      }
+      console.log(res);
+      this.discover=res.result
+      console.log(this.discover);
+    },
+    onChange(index) {
+      this.coord = this.hotSlideshow[index].typeTitle;
+    },
+  },
+};
+</script>
+
+<style lang="less" scoped>
+.home {
+  width: 100%;
+  background-color: #191c1e;
+  .showon-top {
+    width: 100%;
+    height: 30px;
+    background-color: #24262b;
+  }
+  .title {
+    text-align: center;
+    font-size: 16px;
+    color: #fff;
+    margin-top: 10px;
+  }
+  .slideshow {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .everyday {
+    width: 100%;
   }
 }
-</script>
+/deep/ .van-swipe {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/deep/ .van-swipe__track {
+  height: 190px;
+}
+/deep/ .van-nav-bar {
+  background-color: #191c1e;
+  color: #fff;
+}
+/deep/ .van-nav-bar__title {
+  color: #fff;
+}
+</style>
