@@ -115,7 +115,7 @@ export default {
       );
       console.log(this.SingerClass);
       // if(this.SingerClass !== ''){
-      this.onLoad();
+      this.onLoad(index);
       // }
     },
     clearTimeout(timer) {
@@ -124,20 +124,15 @@ export default {
     // 加载数据
     onLoad(index) {
       console.log(index);
-      if (index === undefined) {
-        return
-      }
       let timer = setTimeout(() => {
         for (let i = 0; i < 10; i++) {
             this.loadingList.push(
               this.SingerClass[index].newSong[this.newSongIndex]
             );
-
           this.newSongIndex++;
         }
         // 加载状态结束
         this.loading = false;
-
         // 数据全部加载完成
         // console.log(index);
         console.log(this.SingerClass[index].newSong.length);
@@ -145,7 +140,7 @@ export default {
           this.clearTimeout(timer);
           this.finished = true;
         }
-      }, 1000);
+      }, 500);
     },
   },
 };
@@ -159,6 +154,7 @@ export default {
   text-indent: 15px;
   margin-top: 10px;
   color: #d9d9da;
+  margin-bottom: 15px;
 }
 .navigation {
   width: 100%;
@@ -169,7 +165,7 @@ export default {
     width: 900px;
     .show-MV {
       width: 130px;
-      margin: 20px 0px 10px 20px;
+      margin: 0px 0px 10px 20px;
       border-radius: 10px;
       overflow: hidden;
       background-color: #191c1e;

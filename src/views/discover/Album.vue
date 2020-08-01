@@ -1,15 +1,18 @@
 <template>
-    <div>
-专辑
-    </div>
+  <div class="album">
+    <div>新专推荐</div>
+  </div>
 </template>
 
 <script>
-    export default {
-        
-    }
+
+
+export default {
+  // 注册组件
+ 
+  
+};
 </script>
 
 <style lang="less" scoped>
-
 </style>
