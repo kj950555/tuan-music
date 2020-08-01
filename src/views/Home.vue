@@ -10,74 +10,35 @@
       </template>
     </van-nav-bar>
 
-    <div class="title">热门推荐</div>
-    <div class="slideshow">
-      <van-swipe @change="onChange" :autoplay="3000">
-        <van-swipe-item v-for="(inet,index) in hotSlideshow" :key="index">
-          <img class="img-scale" :src="inet.imageUrl+'?param=420y200'" alt />
-          <!-- <div class=""></div> -->
-        </van-swipe-item>
-        <template #indicator>
-          <Indicator :coord="coord" />
-        </template>
-      </van-swipe>
+    <div class="content">
+      <router-view />
     </div>
-    <div class="title">推荐歌单</div>
-    <div class="everyday">
-      <Card v-for="(imen,index) in discover" :key="index" />
-    </div>
+    <van-tabbar v-model="active" inactive-color="#636363" active-color="#FFFFFF" @change="onChange">
+      <van-tabbar-item icon="fire">热门</van-tabbar-item>
+      <van-tabbar-item icon="audio">发现</van-tabbar-item>
+      <van-tabbar-item icon="music">播放</van-tabbar-item>
+      <van-tabbar-item icon="manager">登录</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 
 <script>
-import Indicator from "../components/Indicator";
-import Card from "../components/Card";
 export default {
   data() {
     return {
-      hotSlideshow: [],
-      coord: "",
-      discover:[]
+      active: 0,
+      skip: [
+        { naem: "Hot", isActive: true },
+        { naem: "Discover", isActive: true },
+        { naem: "Player", isActive: true },
+        { naem: "Login", isActive: true },
+      ],
     };
   },
-  created() {
-    // 获取轮播图资源
-    this.Slideshow();
-    // 获取发现
-    this.getDiscover();
-  },
-  components: {
-    // 注册组件
-    Indicator,
-    Card,
-  },
   methods: {
-    // 获取轮播图资源
-    async Slideshow() {
-      const { data: res } = await this.$http.get("/banner");
-      if (res.code !== 200) {
-        return this.$notify({
-          type: "primary",
-          message: "通知内容",
-        });
-      }
-      this.hotSlideshow = res.banners;
-      console.log("热门歌曲", this.hotSlideshow);
-    },
-    async getDiscover() {
-      const { data: res } = await this.$http.get("/personalized?limit=5");
-      if (res.code !== 200) {
-        return this.$notify({
-          type: "primary",
-          message: "通知内容",
-        });
-      }
-      console.log(res);
-      this.discover=res.result
-      console.log(this.discover);
-    },
     onChange(index) {
-      this.coord = this.hotSlideshow[index].typeTitle;
+      this.$router.push({ name: this.skip[index].naem });
+       
     },
   },
 };
@@ -86,7 +47,7 @@ export default {
 <style lang="less" scoped>
 .home {
   width: 100%;
-  background-color: #191c1e;
+
   .showon-top {
     width: 100%;
     height: 30px;
@@ -98,27 +59,28 @@ export default {
     color: #fff;
     margin-top: 10px;
   }
-  .slideshow {
-    margin-top: 20px;
-    width: 100%;
+  .content {
+    position: fixed;
+    top: 76px;
+    left: 0;
+    right: 0;
+    bottom: 50px;
+    overflow-y: auto;
   }
-  .everyday {
-    width: 100%;
-  }
+}
+/deep/ .van-nav-bar {
+  background-color: #191c1e;
+  color: #fff;
 }
 /deep/ .van-swipe {
   border-radius: 10px;
   overflow: hidden;
 }
 
-/deep/ .van-swipe__track {
-  height: 190px;
-}
-/deep/ .van-nav-bar {
-  background-color: #191c1e;
-  color: #fff;
-}
 /deep/ .van-nav-bar__title {
   color: #fff;
+}
+/deep/ .van-tabbar {
+  background-color: #24262b;
 }
 </style>

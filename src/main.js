@@ -9,6 +9,10 @@ import './element'
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+// 引入路由组件
+import VueRouter from "vue-router";
+
+
 Vue.use(VueAxios, axios)
 
 
@@ -34,6 +38,15 @@ axios.interceptors.request.use((config) => {
   // config.headers.Authorization = localStorage.getItem('token')
   return config;
 });
+// 设置重复点击的错误
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch((err) => err);
+};
+
+
+
+
 
 new Vue({
   router,

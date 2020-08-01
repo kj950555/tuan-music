@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-   
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -26,10 +25,13 @@
     }
   }
 }
+body {
+  background-color: #191c1e;
+}
 .font-color {
   color: #fff;
 }
-p{
+p {
   margin: 0;
   padding: 0;
 }
@@ -49,8 +51,4 @@ p{
   content: "";
   clear: both;
 }
-
-
-
-
 </style>
