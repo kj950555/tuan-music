@@ -34,6 +34,11 @@ export const routes = [
           component:()=>import('../views/discover/Song.vue')
         },
         {
+          path:'/ranking',
+          name:'Ranking',
+          component:()=>import('../views/discover/Ranking.vue')
+        },
+        {
           path: '*',
           redirect: {
             name: 'Singer'

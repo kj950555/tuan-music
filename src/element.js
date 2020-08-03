@@ -14,7 +14,8 @@ import {
   TabbarItem,
   Tab, Tabs ,
   NoticeBar ,
-  List
+  List,
+  Lazyload 
 } from "vant";
 
 Vue.use(NavBar)
@@ -31,3 +32,4 @@ Vue.use(NavBar)
   .use(Tabs)
   .use(NoticeBar)
   .use(List)
+  .use(Lazyload )

@@ -25,6 +25,7 @@ export default {
         { option: "艺人", icon: "friends-o", mane: "Singer", isActive: true },
         { option: "歌曲", icon: "music-o", mane: "Song", isActive: false },
         { option: "专辑", icon: "fire-o", mane: "Album", isActive: false },
+        { option: "排行榜", icon: "fire-o", mane: "Ranking", isActive: false },
       ],
     };
   },
@@ -53,7 +54,7 @@ export default {
 
 <style lang="less" scoped>
 .cut-tag {
-  width: 250px;
+  width: 300px;
   height: 28px;
   line-height: 28px;
   font-size: 16px;
@@ -78,6 +79,6 @@ export default {
   width: 100%;
 }
 .options {
-  margin: 0 20px;
+  margin: 0 15px;
 }
 </style>

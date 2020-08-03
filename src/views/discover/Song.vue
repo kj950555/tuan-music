@@ -87,6 +87,7 @@ export default {
         return this.$notify({
           type: "primary",
           message: "资源获取失败",
+          
         });
       }
       this.SingerClass[index].newSong = res.data;
@@ -114,9 +115,9 @@ export default {
         this.SingerClass[index].haveAccess
       );
       console.log(this.SingerClass);
-      // if(this.SingerClass !== ''){
+      this.finished = false
       this.onLoad(index);
-      // }
+     
     },
     clearTimeout(timer) {
       clearInterval(timer);
@@ -140,7 +141,7 @@ export default {
           this.clearTimeout(timer);
           this.finished = true;
         }
-      }, 500);
+      }, 1000);
     },
   },
 };

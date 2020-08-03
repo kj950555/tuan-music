@@ -1,6 +1,6 @@
 <template>
     <div>
-播放器
+音乐页面
     </div>
 </template>
 

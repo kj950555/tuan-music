@@ -2,6 +2,7 @@
   <div class="home">
     <div class="showon-top"></div>
     <van-nav-bar title="个性推荐">
+      
       <template #right>
         <van-icon name="search" size="18" color="#fff" />
       </template>
