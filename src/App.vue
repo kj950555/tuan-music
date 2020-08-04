@@ -51,4 +51,20 @@ p {
   content: "";
   clear: both;
 }
+@font-face {
+  font-family: "iconfont";
+  src: url("../src/assets/images/iconfont/iconfont.eot");
+  src: url("../src/assets/images/iconfont/iconfont.eot?#iefix")
+      format("embedded-opentype"),
+    url("../src/assets/images/iconfont/iconfont.woff") format("woff"),
+    url("../src/assets/images/iconfont/iconfont.ttf") format("truetype"),
+    url("../src/assets/images/iconfont/iconfont.svg#iconfont") format("svg");
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+   color: #575B62;
+}
 </style>
