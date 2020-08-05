@@ -60,6 +60,6 @@ export default {
   width: 300px;
   height: 300px;
   z-index: 666;
-  background: rgb(225,230,142);
+
 }
 </style>

@@ -1,8 +1,16 @@
 <template>
   <div class="home">
     <div class="showon-top"></div>
-    <van-nav-bar title="个性推荐">
-      
+    <van-nav-bar >
+      <template #title>
+        <div class="navigation">
+         <div class="tab-control clearfix">
+                <div class="fl title"  v-for="(item,index) in skip" :key="index" @click="onChange(index,item)" :class="item.isActive ? 'active' : ''">
+                      {{item.title}}
+                </div>
+         </div>
+        </div>
+      </template>
       <template #right>
         <van-icon name="search" size="18" color="#fff" />
       </template>
@@ -14,12 +22,6 @@
     <div class="content">
       <router-view />
     </div>
-    <van-tabbar v-model="active" inactive-color="#636363" active-color="#FFFFFF" @change="onChange">
-      <van-tabbar-item icon="fire">热门</van-tabbar-item>
-      <van-tabbar-item icon="audio">发现</van-tabbar-item>
-      <van-tabbar-item icon="music">播放</van-tabbar-item>
-      <van-tabbar-item icon="manager">登录</van-tabbar-item>
-    </van-tabbar>
   </div>
 </template>
 
@@ -29,15 +31,25 @@ export default {
     return {
       active: 0,
       skip: [
-        { naem: "Hot", isActive: true },
-        { naem: "Discover", isActive: true },
-        { naem: "Player", isActive: true },
-        { naem: "Login", isActive: true },
+        {title:"热门",  naem: "Hot", isActive: true },
+        {title:"发现",  naem: "Discover", isActive: false },
+        {title:"音乐", naem: "Player", isActive: false },
+        {title:"播放", naem: "Login", isActive: false },
       ],
     };
   },
   methods: {
-    onChange(index) {
+    onChange(index ,item) {
+      if(item.isActive){
+        return
+      }
+      for(let i =0 ; i<this.skip.length;i++){
+        if(this.skip[i].isActive == true){
+          this.skip[i].isActive = false
+          break
+        }
+      }
+      this.skip[index].isActive = true
       this.$router.push({ name: this.skip[index].naem });
        
     },
@@ -61,12 +73,23 @@ export default {
     margin-top: 10px;
   }
   .content {
-    position: fixed;
-    top: 76px;
-    left: 0;
-    right: 0;
-    bottom: 50px;
-    overflow-y: auto;
+   
+  }
+  .navigation{
+    width: 200px;
+    overflow: hidden;
+
+  }
+  .tab-control{
+    .title{
+      width: 50px;
+      font-size: 14px;
+       margin-top: 0;
+    }
+    .active{
+      font-size: 16px;
+      font-weight: 800;
+    }
   }
 }
 /deep/ .van-nav-bar {
@@ -84,4 +107,5 @@ export default {
 /deep/ .van-tabbar {
   background-color: #24262b;
 }
+
 </style>

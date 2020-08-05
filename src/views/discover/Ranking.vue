@@ -1,5 +1,6 @@
 <template>
   <div class="ran-king">
+    <!-- 排行榜 -->
     <div class="tabulate clearfix" v-for="(imet ,index) in tabulate" :key="index">
       <div class="card fr">
         <img class="img-scale" :src="imet.coverImgUrl+'?param=300y200'" alt />
@@ -47,7 +48,9 @@ export default {
   .card {
     width: 80%;
     height: 100px;
-    //  background-color: #9B47DE;
+ 
+  
+    transform: matrix3d(1.0, 2.0);
     opacity: 0.9;
   }
   .content {
