@@ -1,14 +1,18 @@
 <template>
   <div class="home">
     <div class="showon-top"></div>
-    <van-nav-bar >
+    <van-nav-bar @click-left="InformationPage">
       <template #title>
         <div class="navigation">
-         <div class="tab-control clearfix">
-                <div class="fl title"  v-for="(item,index) in skip" :key="index" @click="onChange(index,item)" :class="item.isActive ? 'active' : ''">
-                      {{item.title}}
-                </div>
-         </div>
+          <div class="tab-control clearfix">
+            <div
+              class="fl title"
+              v-for="(item,index) in skip"
+              :key="index"
+              @click="onChange(index,item)"
+              :class="item.isActive ? 'active' : ''"
+            >{{item.title}}</div>
+          </div>
         </div>
       </template>
       <template #right>
@@ -19,6 +23,9 @@
       </template>
     </van-nav-bar>
 
+    <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round >
+       <info-pages/>
+     </van-popup>
     <div class="content">
       <router-view />
     </div>
@@ -26,44 +33,61 @@
 </template>
 
 <script>
+import InfoPages from "@/components/InfoPages";
 export default {
- 
   data() {
     return {
       active: 0,
       skip: [
-        {title:"热门",  naem: "Hot", isActive: false ,urls:['Hot']},
-        {title:"发现",  naem: "Discover", isActive: false,urls:['Discover','Singer','Album','Song','Ranking'] },
-        {title:"歌单", naem: "Playlist", isActive: false,urls:['Playlist','Easyman'] },
-        {title:"播放", naem: "Login", isActive: false,urls:['Login'] },
+        { title: "热门", naem: "Hot", isActive: false, urls: ["Hot"] },
+        {
+          title: "发现",
+          naem: "Discover",
+          isActive: false,
+          urls: ["Discover", "Singer", "Album", "Song", "Ranking"],
+        },
+        {
+          title: "歌单",
+          naem: "Playlist",
+          isActive: false,
+          urls: ["Playlist", "Easyman"],
+        },
+        { title: "播放", naem: "Login", isActive: false, urls: ["Login"] },
       ],
+      show: false,
     };
   },
-  created(){
-  this.ActiveIem()
+  // 注册组件
+  components:{
+    InfoPages
+  },
+  created() {
+    this.ActiveIem();
   },
   methods: {
-    ActiveIem(){
-     for(let i =0 ;i<this.skip.length;i++){
-       if(this.skip[i].urls.indexOf(this.$route.name) > -1){
-        
-         this.skip[i].isActive = true
-       }
-     }
-    },
-    onChange(index ,item) {
-      if(item.isActive){
-        return
-      }
-      for(let i =0 ; i<this.skip.length;i++){
-        if(this.skip[i].isActive == true){
-          this.skip[i].isActive = false
-          break
+    ActiveIem() {
+      for (let i = 0; i < this.skip.length; i++) {
+        if (this.skip[i].urls.indexOf(this.$route.name) > -1) {
+          this.skip[i].isActive = true;
         }
       }
-      this.skip[index].isActive = true
+    },
+    // 显示
+    InformationPage() {
+      this.show = true;
+    },
+    onChange(index, item) {
+      if (item.isActive) {
+        return;
+      }
+      for (let i = 0; i < this.skip.length; i++) {
+        if (this.skip[i].isActive == true) {
+          this.skip[i].isActive = false;
+          break;
+        }
+      }
+      this.skip[index].isActive = true;
       this.$router.push({ name: this.skip[index].naem });
-       
     },
   },
 };
@@ -85,20 +109,18 @@ export default {
     margin-top: 10px;
   }
   .content {
-   
   }
-  .navigation{
+  .navigation {
     width: 200px;
     overflow: hidden;
-
   }
-  .tab-control{
-    .title{
+  .tab-control {
+    .title {
       width: 50px;
       font-size: 14px;
-       margin-top: 0;
+      margin-top: 0;
     }
-    .active{
+    .active {
       font-size: 16px;
       font-weight: 800;
     }
@@ -119,5 +141,7 @@ export default {
 /deep/ .van-tabbar {
   background-color: #24262b;
 }
-
+/deep/ .van-popup{
+  background: #F5F5F7;
+}
 </style>

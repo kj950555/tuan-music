@@ -20,6 +20,13 @@
       "unicode_decimal": 58936
     },
     {
+      "icon_id": "2116281",
+      "name": "喜欢",
+      "font_class": "love_icon",
+      "unicode": "e65b",
+      "unicode_decimal": 58971
+    },
+    {
       "icon_id": "2154282",
       "name": "循环播放_32",
       "font_class": "xunhuanbofang",
@@ -48,11 +55,39 @@
       "unicode_decimal": 58925
     },
     {
+      "icon_id": "4166140",
+      "name": "朋友",
+      "font_class": "pengyou",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "5330671",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e7b8",
+      "unicode_decimal": 59320
+    },
+    {
       "icon_id": "6536736",
       "name": "播放",
       "font_class": "bofang1",
       "unicode": "e667",
       "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "9017759",
+      "name": "信号",
+      "font_class": "xinhao",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "12103653",
+      "name": "用户收藏，用户关注",
+      "font_class": "huabanfuben",
+      "unicode": "eb81",
+      "unicode_decimal": 60289
     },
     {
       "icon_id": "16242860",
