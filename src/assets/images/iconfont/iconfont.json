@@ -13,6 +13,13 @@
       "unicode_decimal": 59053
     },
     {
+      "icon_id": "1244550",
+      "name": "分类",
+      "font_class": "fenlei",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
       "icon_id": "2154282",
       "name": "循环播放_32",
       "font_class": "xunhuanbofang",
@@ -46,6 +53,13 @@
       "font_class": "bofang1",
       "unicode": "e667",
       "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "16242860",
+      "name": "M_循环",
+      "font_class": "M_xunhuan",
+      "unicode": "e75d",
+      "unicode_decimal": 59229
     }
   ]
 }

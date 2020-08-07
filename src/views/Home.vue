@@ -27,18 +27,30 @@
 
 <script>
 export default {
+ 
   data() {
     return {
       active: 0,
       skip: [
-        {title:"热门",  naem: "Hot", isActive: true },
-        {title:"发现",  naem: "Discover", isActive: false },
-        {title:"音乐", naem: "Player", isActive: false },
-        {title:"播放", naem: "Login", isActive: false },
+        {title:"热门",  naem: "Hot", isActive: false ,urls:['Hot']},
+        {title:"发现",  naem: "Discover", isActive: false,urls:['Discover','Singer','Album','Song','Ranking'] },
+        {title:"歌单", naem: "Playlist", isActive: false,urls:['Playlist','Easyman'] },
+        {title:"播放", naem: "Login", isActive: false,urls:['Login'] },
       ],
     };
   },
+  created(){
+  this.ActiveIem()
+  },
   methods: {
+    ActiveIem(){
+     for(let i =0 ;i<this.skip.length;i++){
+       if(this.skip[i].urls.indexOf(this.$route.name) > -1){
+        
+         this.skip[i].isActive = true
+       }
+     }
+    },
     onChange(index ,item) {
       if(item.isActive){
         return

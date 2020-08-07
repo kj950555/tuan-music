@@ -1,5 +1,5 @@
 import Vue from "vue";
-import "vant/lib/index.css";
+
 
 import {
   NavBar,
@@ -15,7 +15,11 @@ import {
   Tab, Tabs ,
   NoticeBar ,
   List,
-  Lazyload 
+  Lazyload ,
+  DropdownMenu, 
+  DropdownItem,
+  Cell,
+  Popup 
 } from "vant";
 
 Vue.use(NavBar)
@@ -32,4 +36,9 @@ Vue.use(NavBar)
   .use(Tabs)
   .use(NoticeBar)
   .use(List)
-  .use(Lazyload )
+  .use(Lazyload ,{lazyComponent: true})
+  .use(DropdownMenu )
+  .use(DropdownItem )
+  .use(Cell)
+  .use(Popup)
+ 

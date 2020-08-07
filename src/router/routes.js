@@ -3,6 +3,11 @@ export const routes = [
     path: "/",
     name: "Home",
     component: () => import("../views/Home.vue"),
+    beforeEnter: (to, from, next) => {
+      console.log('路由守卫to==>',to);
+      console.log('路由守卫to==>',from);
+      next()
+    },
     children: [
       // 登录
       {
@@ -52,19 +57,20 @@ export const routes = [
         name: "Hot",
         component: () => import("../views/HotSongs/Hot.vue"),
       },
-      //  播放
+      //  歌单
       {
-        path: "/player",
-        name: "Player",
-        component: () => import("../views/music/Player.vue"),
+        path: "/playlist",
+        name: "Playlist",
+        component: () => import("../views/music/Playlist.vue"),
+        children:[
+          {
+            path:'/easyman',
+            name:'Easyman',
+            component:()=> import('../views/music/Easyman.vue')
+          }
+        ]
       },
-      {
-        path: '*',
-        redirect: {
-          name: 'Hot'
-        }
-      }
-      
+     
     ],
    
   },

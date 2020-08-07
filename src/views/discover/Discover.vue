@@ -22,7 +22,7 @@ export default {
     return {
       active: 0,
       tabTag: [
-        { option: "艺人", icon: "friends-o", mane: "Singer", isActive: true },
+        { option: "艺人", icon: "friends-o", mane: "Singer", isActive: false },
         { option: "歌曲", icon: "music-o", mane: "Song", isActive: false },
         { option: "专辑", icon: "fire-o", mane: "Album", isActive: false },
         { option: "排行榜", icon: "fire-o", mane: "Ranking", isActive: false },
@@ -30,9 +30,10 @@ export default {
     };
   },
   created() {
-    this.$router.push({ name: "Singer" });
+    this.$router.push({ name: this.tabTag[0].mane });
   },
   methods: {
+     
     Switchover(e, index) {
       if (this.tabTag[index].isActive == true) {
         return;

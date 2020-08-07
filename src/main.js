@@ -13,6 +13,14 @@ import VueAxios from "vue-axios";
 import VueRouter from "vue-router";
 
 
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  // console.log('全局守卫to==>',to);
+  // console.log('全局守卫from==>',from);
+  next()
+})
+
+
 Vue.use(VueAxios, axios)
 
 
