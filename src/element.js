@@ -19,7 +19,8 @@ import {
   DropdownMenu, 
   DropdownItem,
   Cell,
-  Popup 
+  Popup ,
+  Field
 } from "vant";
 
 Vue.use(NavBar)
@@ -41,4 +42,5 @@ Vue.use(NavBar)
   .use(DropdownItem )
   .use(Cell)
   .use(Popup)
+  .use(Field)
  

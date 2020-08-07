@@ -67,4 +67,9 @@ p {
   -moz-osx-font-smoothing: grayscale;
    color: #575B62;
 }
+.showon-top {
+    width: 100%;
+    height: 30px;
+    background-color: #24262b;
+  }
 </style>

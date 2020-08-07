@@ -2,7 +2,7 @@ export const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home.vue"),
+    component: () => import("@/views/Home.vue"),
     beforeEnter: (to, from, next) => {
       console.log('路由守卫to==>',to);
       console.log('路由守卫to==>',from);
@@ -13,7 +13,7 @@ export const routes = [
       {
         path: "/login",
         name: "Login",
-        component: () => import("../views/register/Login.vue"),
+        component: () => import("@/views/register/Login.vue"),
       },
       // 发现
       {
@@ -55,18 +55,18 @@ export const routes = [
       {
         path: "/hot",
         name: "Hot",
-        component: () => import("../views/HotSongs/Hot.vue"),
+        component: () => import("@/views/HotSongs/Hot.vue"),
       },
       //  歌单
       {
         path: "/playlist",
         name: "Playlist",
-        component: () => import("../views/music/Playlist.vue"),
+        component: () => import("@/views/music/Playlist.vue"),
         children:[
           {
             path:'/easyman',
             name:'Easyman',
-            component:()=> import('../views/music/Easyman.vue')
+            component:()=> import('@/views/music/Easyman.vue')
           }
         ]
       },
@@ -74,6 +74,13 @@ export const routes = [
     ],
    
   },
+  {
+    // 搜索页面
+    path:'/search',
+    name:'Search',
+    component:()=> import('@/views/search/Search.vue')
+  
+    },
   {
     path: '*',
     redirect: {

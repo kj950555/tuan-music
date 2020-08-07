@@ -8,11 +8,13 @@
         <samp>点击登录</samp>
       </div>
     </div>
+    <van-cell is-link><i class="iconfont icon">&#xeb81;</i>个人中心</van-cell>
     <van-cell is-link><i class="iconfont icon">&#xe7b8;</i> 发现音乐</van-cell>
     <van-cell is-link><i class="iconfont icon">&#xeb81;</i> 我的收藏</van-cell>
     <van-cell is-link><i class="iconfont icon">&#xe60c;</i>私人FM</van-cell>
     <van-cell is-link><i class="iconfont icon">&#xe61a;</i>朋友</van-cell>
-    <van-cell is-link><i class="iconfont icon">&#xeb81;</i>我喜欢的音乐</van-cell>
+    <van-cell is-link><i class="iconfont icon">&#xe65b;</i>我喜欢的音乐</van-cell>
+    
   </div>
 </template>
 

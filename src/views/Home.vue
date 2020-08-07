@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="showon-top"></div>
-    <van-nav-bar @click-left="InformationPage">
+    <van-nav-bar @click-left="InformationPage"  @click-right="Search" >
       <template #title>
         <div class="navigation">
           <div class="tab-control clearfix">
@@ -23,9 +23,9 @@
       </template>
     </van-nav-bar>
 
-    <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round >
-       <info-pages/>
-     </van-popup>
+    <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round>
+      <info-pages />
+    </van-popup>
     <div class="content">
       <router-view />
     </div>
@@ -58,8 +58,8 @@ export default {
     };
   },
   // 注册组件
-  components:{
-    InfoPages
+  components: {
+    InfoPages,
   },
   created() {
     this.ActiveIem();
@@ -75,6 +75,9 @@ export default {
     // 显示
     InformationPage() {
       this.show = true;
+    },
+    Search(){
+      this.$router.push({ name: 'Search' });
     },
     onChange(index, item) {
       if (item.isActive) {
@@ -97,11 +100,6 @@ export default {
 .home {
   width: 100%;
 
-  .showon-top {
-    width: 100%;
-    height: 30px;
-    background-color: #24262b;
-  }
   .title {
     text-align: center;
     font-size: 16px;
@@ -141,7 +139,7 @@ export default {
 /deep/ .van-tabbar {
   background-color: #24262b;
 }
-/deep/ .van-popup{
-  background: #F5F5F7;
+/deep/ .van-popup {
+  background: #f5f5f7;
 }
 </style>
