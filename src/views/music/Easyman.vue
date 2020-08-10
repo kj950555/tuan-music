@@ -19,6 +19,7 @@
 <script>
 import GridShow from "@/components/GridShow";
 export default {
+
   data() {
     return {
       playlists: [],
@@ -39,6 +40,7 @@ export default {
     }
     
   },
+
  
   // 注册组件
   components: {
@@ -60,9 +62,12 @@ export default {
       this.axios({
         method: "GET",
         url: `/top/playlist?limit=6&cat=${name}`,
+        data:{
+          limit:6
+        }
       })
         .then((res) => {
-          // console.log(res.data);
+          console.log( 'ajaxo',res);
           if (res.data.code == 200) {
            
             this.hotPlaylist[index].songlists = res.data.playlists;

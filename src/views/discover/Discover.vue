@@ -11,7 +11,11 @@
       <i class="line-tag" ref="lingTag"></i>
     </div>
     <div class="particulars">
-      <router-view />
+      <transition name="slide-fade">
+         <keep-alive >
+        <router-view />
+         </keep-alive >
+      </transition>
     </div>
   </div>
 </template>
@@ -33,7 +37,6 @@ export default {
     this.$router.push({ name: this.tabTag[0].mane });
   },
   methods: {
-     
     Switchover(e, index) {
       if (this.tabTag[index].isActive == true) {
         return;
@@ -81,5 +84,18 @@ export default {
 }
 .options {
   margin: 0 15px;
+}
+
+
+.slide-fade-enter-active {
+  transition: all .25s linear;
+}
+.slide-fade-leave-active {
+  transition: all .25s linear;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+  transform: translateY(100px);
+  opacity: 0;
 }
 </style>

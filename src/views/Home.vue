@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="showon-top"></div>
-    <van-nav-bar @click-left="InformationPage"  @click-right="Search" >
+    <van-nav-bar @click-left="InformationPage" @click-right="Search">
       <template #title>
         <div class="navigation">
           <div class="tab-control clearfix">
@@ -26,14 +26,25 @@
     <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round>
       <info-pages />
     </van-popup>
+    <div class="audio">
+      <audio-view
+        :name="'浮夸'"
+        :singer="'陈奕迅'"
+        :image="'http://p3.music.126.net/ltoFA2DfaCPOsAiXnDns2Q==/109951164681625927.jpg?param=100y100'"
+        :AudioPath="'http://m8.music.126.net/20200810150751/628830546f4d1f54db504bffe8c56abd/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/3509928572/40a7/8de3/33c0/40fb919098def04c73c8b7342f445ad1.mp3' "
+      />
+    </div>
     <div class="content">
-      <router-view />
+      <transition name="slide-fade">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
 import InfoPages from "@/components/InfoPages";
+import AudioView from "@/components/AudioView";
 export default {
   data() {
     return {
@@ -52,7 +63,6 @@ export default {
           isActive: false,
           urls: ["Playlist", "Easyman"],
         },
-        { title: "播放", naem: "Login", isActive: false, urls: ["Login"] },
       ],
       show: false,
     };
@@ -60,8 +70,10 @@ export default {
   // 注册组件
   components: {
     InfoPages,
+    AudioView,
   },
   created() {
+    this.$router.push({ name: this.skip[0].naem });
     this.ActiveIem();
   },
   methods: {
@@ -76,8 +88,8 @@ export default {
     InformationPage() {
       this.show = true;
     },
-    Search(){
-      this.$router.push({ name: 'Search' });
+    Search() {
+      this.$router.push({ name: "Search" });
     },
     onChange(index, item) {
       if (item.isActive) {
@@ -106,15 +118,15 @@ export default {
     color: #fff;
     margin-top: 10px;
   }
-  .content {
-  }
+
   .navigation {
     width: 200px;
     overflow: hidden;
   }
   .tab-control {
+    text-align: center;
     .title {
-      width: 50px;
+      width: 62px;
       font-size: 14px;
       margin-top: 0;
     }
@@ -122,6 +134,24 @@ export default {
       font-size: 16px;
       font-weight: 800;
     }
+  }
+  .slide-fade-enter-active {
+    transition: all 0.25s linear;
+  }
+  .slide-fade-leave-active {
+    transition: all 0.25s linear;
+  }
+  .slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+    transform: rotate(30deg);
+    opacity: 0;
+  }
+  .audio {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
   }
 }
 /deep/ .van-nav-bar {

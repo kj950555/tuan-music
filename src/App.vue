@@ -1,8 +1,18 @@
 <template>
   <div id="app">
-    <router-view />
+    
+      <router-view />
+   
   </div>
 </template>
+
+
+
+<script>
+export default {
+ 
+}
+</script>
 
 <style lang="less">
 #app {
@@ -65,11 +75,16 @@ p {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-   color: #575B62;
+  color: #575b62;
 }
 .showon-top {
-    width: 100%;
-    height: 30px;
-    background-color: #24262b;
-  }
+  width: 100%;
+  height: 30px;
+  background-color: #24262b;
+}
+.slide-right {
+  background: chartreuse;
+  width: 200px;
+  height: 200px;
+}
 </style>
