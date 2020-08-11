@@ -31,9 +31,16 @@
             </div>
             <div class="particulars fl">
               <div class="scrollbar">
-                <van-notice-bar color="#fff" background="#191C1E">{{imen.album.name}}</van-notice-bar>
+                <van-notice-bar
+                  color="#fff"
+                  background="#191C1E"
+                  :scrollable="false"
+                >{{imen.album.name}}</van-notice-bar>
               </div>
               <span>{{imen.artists[0].name}}</span>
+            </div>
+            <div class="play-bnt fr" @click="PlayBack(imen)">
+              <i class="iconfont">&#xe667;</i>
             </div>
           </div>
         </van-list>
@@ -70,10 +77,11 @@ export default {
       this.SingerClass[0].haveAccess
     );
     this.getSongMV();
+    this.LabelSwitching(0)
   },
   methods: {
     // 解构vuex的mutations.js文件的事件
-    ...mapMutations(["getAnewCourier"]),
+    ...mapMutations(["getTheSongList" ,"changeCurrentList"]),
     //   获取最新歌曲
     async getAccessSong(id, index, access) {
       // 判断是不是获取到数据了，如果获取到了就return
@@ -87,7 +95,6 @@ export default {
         return this.$notify({
           type: "primary",
           message: "资源获取失败",
-          
         });
       }
       this.SingerClass[index].newSong = res.data;
@@ -115,21 +122,28 @@ export default {
         this.SingerClass[index].haveAccess
       );
       console.log(this.SingerClass);
-      this.finished = false
+      this.finished = false;
       this.onLoad(index);
-     
     },
     clearTimeout(timer) {
       clearInterval(timer);
     },
+
+    // 播放歌曲
+    PlayBack(imen) {
+      console.log('imen ==> ', imen);
+       this.getTheSongList({ valu: imen });
+       this.changeCurrentList({valu: imen})
+    },
+
     // 加载数据
     onLoad(index) {
       console.log(index);
       let timer = setTimeout(() => {
         for (let i = 0; i < 10; i++) {
-            this.loadingList.push(
-              this.SingerClass[index].newSong[this.newSongIndex]
-            );
+          this.loadingList.push(
+            this.SingerClass[index].newSong[this.newSongIndex]
+          );
           this.newSongIndex++;
         }
         // 加载状态结束
@@ -206,7 +220,6 @@ export default {
     margin-left: 10px;
     text-align: left;
     .scrollbar {
-      width: 250px;
       margin-top: 10px;
     }
     p {
@@ -219,6 +232,12 @@ export default {
       color: #fdffff;
       padding: 0 16px;
     }
+  }
+  .play-bnt {
+    margin-right: 10px;
+    font-size: 30px;
+    line-height: 80px;
+    color: #fff;
   }
 }
 /deep/.van-notice-bar {

@@ -59,7 +59,7 @@ export default {
 .artist {
   margin-bottom: 20px;
   width: 100%;
-  opacity:0.8;
+  opacity: 0.8;
   .card {
     padding: 5px 5px 10px;
     margin: 15px 0px 0px 11px;
@@ -75,8 +75,12 @@ export default {
       border-radius: 5px;
     }
     .name {
-      margin: 5px;
+      width: 100px;
+      height: 30px;
+      margin: 5px auto;
       color: #fff;
+      
+      text-overflow: ellipsis;
     }
   }
 }

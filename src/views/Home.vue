@@ -24,19 +24,14 @@
     </van-nav-bar>
 
     <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round>
-      <info-pages />
+      <info-pages/>
     </van-popup>
     <div class="audio">
-      <audio-view
-        :name="'浮夸'"
-        :singer="'陈奕迅'"
-        :image="'http://p3.music.126.net/ltoFA2DfaCPOsAiXnDns2Q==/109951164681625927.jpg?param=100y100'"
-        :AudioPath="'http://m8.music.126.net/20200810150751/628830546f4d1f54db504bffe8c56abd/ymusic/obj/w5zDlMODwrDDiGjCn8Ky/3509928572/40a7/8de3/33c0/40fb919098def04c73c8b7342f445ad1.mp3' "
-      />
+      <audio-view/>
     </div>
     <div class="content">
       <transition name="slide-fade">
-        <router-view />
+        <router-view/>
       </transition>
     </div>
   </div>
@@ -45,6 +40,9 @@
 <script>
 import InfoPages from "@/components/InfoPages";
 import AudioView from "@/components/AudioView";
+// 引入vueX数据管理中心
+import { createNamespacedHelpers } from "vuex";
+const { mapMutations, mapState } = createNamespacedHelpers("menuModule");
 export default {
   data() {
     return {
@@ -67,6 +65,8 @@ export default {
       show: false,
     };
   },
+  // 计算属性
+ 
   // 注册组件
   components: {
     InfoPages,
@@ -77,6 +77,8 @@ export default {
     this.ActiveIem();
   },
   methods: {
+    // 解构vuex的mutatuons文件内容
+    ...mapMutations(["getTheSongList"]),
     ActiveIem() {
       for (let i = 0; i < this.skip.length; i++) {
         if (this.skip[i].urls.indexOf(this.$route.name) > -1) {
@@ -87,6 +89,7 @@ export default {
     // 显示
     InformationPage() {
       this.show = true;
+      console.log("iiii", this.TheSongList[0].url);
     },
     Search() {
       this.$router.push({ name: "Search" });
