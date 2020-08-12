@@ -3,7 +3,6 @@ export const routes = [
     path: "/Home",
     name: "Home",
     component: () => import("@/views/Home.vue"),
-   
     children: [
       // 登录
       {
@@ -17,27 +16,36 @@ export const routes = [
         name: "Discover",
         component: () => import("../views/discover/Discover.vue"),
         children: [
+          // 歌手
           {
             path: "/discover/singer",
             name: "Singer",
             component: () => import("../views/discover/Singer.vue"),
           },
-
+          //  专辑
           {
             path: "/discover/album",
             name: "Album",
             component: () => import("../views/discover/Album.vue"),
           },
-
+          //  mv
           {
             path: "/discover/song",
             name: "Song",
             component: () => import("../views/discover/Song.vue"),
           },
+          // 排行榜
           {
             path: "/discover/ranking",
             name: "Ranking",
             component: () => import("../views/discover/Ranking.vue"),
+          },
+          // 排行榜详细
+          {
+            path: "/discover/leaderboards",
+            name: "Leaderboards",
+            component: () =>
+              import("../views/discover/particulars/Leaderboards.vue"),
           },
           // 更多
           {
@@ -60,6 +68,11 @@ export const routes = [
         name: "Hot",
         component: () => import("@/views/HotSongs/Hot.vue"),
       },
+      {
+        path: "/artist",
+        name: "Artist",
+        component: () => import("@/views/discover/particulars/Artist.vue"),
+      },
       //  歌单
       {
         path: "/playlist",
@@ -75,12 +88,6 @@ export const routes = [
       },
     ],
   },
-  // 歌手信息
-  {
-    path: "/artist",
-    name: "Artist",
-    component: () => import("@/views/discover/particulars/Artist.vue"),
-  },
 
   {
     // 搜索页面
@@ -88,6 +95,8 @@ export const routes = [
     name: "Search",
     component: () => import("@/views/search/Search.vue"),
   },
+  // 歌手信息
+
   {
     path: "*",
     redirect: {

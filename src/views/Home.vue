@@ -163,7 +163,7 @@ export default {
   }
   .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform:rotateY(180deg);
+    transform:translate(-30px,-100px);
     opacity: 0;
   }
   .audio {

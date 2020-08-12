@@ -9,10 +9,10 @@ export const state = {
     image: require("@/assets/images/user.png"),
     isSwitchover: false,
     id: null,
+    
   },
   // 获取更多艺人信息
    MoreArtis:{},
-
-   SingerInformation:{}
-
+   SingerInformation:{},
+ 
 };

@@ -9,7 +9,7 @@
     <!-- 信息 -->
     <div class="message fl">
       <div class="song-name">
-        <van-notice-bar scrollable :text="ViewPlayback.name" background="#7C2997"></van-notice-bar>
+        <van-notice-bar scrollable :text="ViewPlayback.name" background="transparent"></van-notice-bar>
       </div>
       <div class="singer">{{ ViewPlayback.singer }}</div>
     </div>
@@ -72,9 +72,10 @@ export default {
   watch: {
     TheSongList: function (newQuestion, message) {
       if (newQuestion.length > 0) {
-        this.QueryMusic(this.ViewPlayback.id);
+        this.AudioPath(this.ViewPlayback.id);
       }
     },
+    
   },
   mounted() {
     this.AudioPlayer();
@@ -93,36 +94,34 @@ export default {
     // 查询音乐是否可用
     async QueryMusic(id) {
       const { data: res } = await this.$http.get(`/check/music?id=${id}`);
-      if (!res.message) {
-        return this.$toast.loading({
+      if (!res.message==200 || res.message == '') {
+        return this.$toast.fail({
           message: "当前歌曲无法获取",
           forbidClick: true,
           //延迟自动关闭加载提示，如果该值为0，则不会自动关闭
           duration: 1000,
         });
       }
-      console.log("是否可以使用", res);
       this.AudioPath(this.ViewPlayback.id);
     },
     // 监听audio标签
     AudioPlayer() {
+      // 获取标签audio/schedule
       this.audio = this.$refs.audio;
       this.music.schedule = this.$refs.schedule;
+      // 获取进度条总长度
       this.minW = this.$refs.AudioView.offsetWidth;
-      // console.log(this.minW);
 
-      // console.log('标签==>', this.audio);
-      this.audio.addEventListener("emptied", () => {
-        if (this.audio.src == "") {
-          // console.log("111");
-          return this.$toast.loading({
-            message: "当前播放器没有歌曲",
-            forbidClick: true,
-            //延迟自动关闭加载提示，如果该值为0，则不会自动关闭
-            duration: 1000,
-          });
-        }
+
+        // 监听是否播放完毕歌曲
+      this.audio.addEventListener("pause", () => {
+        console.log('当前歌曲播放完毕');
+          if (this.audio.ended) {
+            console.log('下一首');
+            this.NextOneHome()
+          }
       });
+
       // 监听audio标签音频是否缓存
       this.audio.addEventListener("loadeddata", () => {
         // 判断是否播放歌曲
@@ -140,13 +139,29 @@ export default {
               this.audio.currentTime,
               this.audio.duration
             );
-            // console.log('进度条==>', this.music.step);
-            // console.log('W===>', this.minW*(this.music.step/100));
+          //  进度条
             this.music.schedule.style.width =
               this.minW * (this.music.step / 100) + "px";
           }, 500);
         }
       });
+
+    // 监听歌曲有没有获取
+    this.audio.addEventListener("onerror",()=>{
+        console.log('onerror出错了！！！！！');
+    })
+    // 监听歌曲有没有获取
+    this.audio.addEventListener("error",()=>{
+      console.log('出错了切换下一首！！！！');
+      this.$toast.fail({
+          message: "当前歌曲没法获取",
+          forbidClick: true,
+          //延迟自动关闭加载提示，如果该值为0，则不会自动关闭
+          duration: 1000,
+        });
+         this.NextOneHome()
+
+    })
     },
     // 时间转换
     RunningTime(time) {
@@ -179,7 +194,7 @@ export default {
     // 当前播放
     PlayMessage(index) {
       this.changeCurrentList({ valu: this.TheSongList[index] });
-      this.QueryMusic(this.ViewPlayback.id);
+     this.AudioPath(this.ViewPlayback.id);
     },
 
     //  播放与暂停

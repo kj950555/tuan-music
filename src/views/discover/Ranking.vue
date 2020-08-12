@@ -1,7 +1,7 @@
 <template>
   <div class="ran-king">
     <!-- 排行榜 -->
-    <div class="tabulate clearfix" v-for="(imet ,index) in tabulate" :key="index">
+    <div class="tabulate clearfix" v-for="(imet ,index) in tabulate" :key="index" @click="LeaderboardContent(imet)">
       <div class="card fr">
         <img class="img-scale" :src="imet.coverImgUrl+'?param=300y200'" alt />
       </div>
@@ -35,6 +35,14 @@ export default {
       this.tabulate = res.list;
       console.log(this.tabulate);
     },
+  LeaderboardContent(imet){
+    this.axios({
+      
+    })
+
+  }
+
+
   },
 };
 </script>

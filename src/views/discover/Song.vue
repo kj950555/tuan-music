@@ -77,11 +77,11 @@ export default {
       this.SingerClass[0].haveAccess
     );
     this.getSongMV();
-    this.LabelSwitching(0)
+    this.LabelSwitching(0);
   },
   methods: {
     // 解构vuex的mutations.js文件的事件
-    ...mapMutations(["getTheSongList" ,"changeCurrentList"]),
+    ...mapMutations(["getTheSongList", "changeCurrentList"]),
     //   获取最新歌曲
     async getAccessSong(id, index, access) {
       // 判断是不是获取到数据了，如果获取到了就return
@@ -131,9 +131,23 @@ export default {
 
     // 播放歌曲
     PlayBack(imen) {
-      console.log('imen ==> ', imen);
-       this.getTheSongList({ valu: imen });
-       this.changeCurrentList({valu: imen})
+      console.log("imen ==> ", imen);
+      this.getTheSongList({
+        valu: {
+          name: imen.album.name,
+          singer: imen.artists[0].name,
+          image: imen.album.picUrl + "?param=70y70",
+          id: imen.id,
+        },
+      });
+      this.changeCurrentList({
+        valu: {
+          name: imen.album.name,
+          singer: imen.artists[0].name,
+          image: imen.album.picUrl + "?param=70y70",
+          id: imen.id,
+        },
+      });
     },
 
     // 加载数据
