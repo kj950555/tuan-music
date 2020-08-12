@@ -217,6 +217,7 @@ export default {
     margin: 10px;
   }
   .particulars {
+    width: 180px;
     margin-left: 10px;
     text-align: left;
     .scrollbar {

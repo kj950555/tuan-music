@@ -1,9 +1,9 @@
 <template>
-  <div class="singer">
-    <div class="artist-list" v-for="(item ,index) in SingerClass" :key="index">
-      <van-nav-bar :left-text="item.name" right-text="更多" @click-right="onClickRight(item)" />
+  <div class="more-artist">
+    <div class="artist-list">
+      <van-nav-bar :left-text="MoreArtis.name" />
       <div class="artist clearfix">
-        <div class="card fl" v-for="( card, index) in item.artist" :key="index">
+        <div class="card fl" v-for="( card, index) in artist" :key="index">
           <div class="picture">
             <img class="img-scale" :src="card.img1v1Url +'?param=100y100'" alt />
           </div>
@@ -13,41 +13,53 @@
         </div>
       </div>
     </div>
+
+    <van-pagination
+      v-model="MoreArtis.currentPage"
+      :page-count="12"
+      mode="simple"
+      @change="PageTurning"
+    />
   </div>
 </template>
 
 <script>
+// 引入vueX
 import { createNamespacedHelpers } from "vuex";
 const { mapMutations, mapState } = createNamespacedHelpers("menuModule");
 export default {
+  beforeRouteEnter(to, from, next) {
+    // 路由跳转前跟新数据
+    next((vm) => {
+      vm.axios({
+        methods:"GET",
+        url:`/artist/list?type=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`
+      }).then((res)=>{
+        
+        vm.artist = res.data.artists
+        console.log("跳转==>", vm.artist);
+      });
+    });
+  },
+
   data() {
     return {
-      SingerClass: [
-        { name: "华语", area: 7, artist: [], path: "MoreArtist" ,currentPage:1},
-        { name: "欧美", area: 96, artist: [], path: "MoreArtist" ,currentPage:1},
-        { name: "日本", area: 8, artist: [], path: "MoreArtist" ,currentPage:1},
-        { name: "韩国", area: 16, artist: [], path: "MoreArtist" ,currentPage:1},
-        { name: "其他", area: 0, artist: [], path: "MoreArtist" ,currentPage:1},
-      ],
+      artist: [],
     };
   },
+  // 计算属性
+  computed: {
+    //  解构vuex的state文件数据、
+    ...mapState(["MoreArtis"]),
+  },
   created() {
-    this.getInformation(this.SingerClass[0].area, 0);
-    this.getInformation(this.SingerClass[1].area, 1);
-    this.getInformation(this.SingerClass[2].area, 2);
-    this.getInformation(this.SingerClass[3].area, 3);
-    this.getInformation(this.SingerClass[4].area, 4);
+    this.getSingerList(this.MoreArtis.area, 1);
   },
   methods: {
-     ...mapMutations(["getMoreArtist"]),
-    onClickRight(item) {
-      this.getMoreArtist({valu:item})
-      this.$router.push({ name: item.path });
-    },
     //   获取歌手
-    async getInformation(id, index) {
+    async getSingerList(id, page) {
       const { data: res } = await this.$http.get(
-        `/artist/list?type=1&area=${id}&limit=6`
+        `/artist/list?type=${page}&area=${id}&limit=30`
       );
 
       if (res.code !== 200) {
@@ -56,8 +68,12 @@ export default {
           message: "资源获取失败",
         });
       }
-      this.SingerClass[index].artist = res.artists;
-      console.log(this.SingerClass);
+      this.artist = res.artists;
+      console.log("歌手列表==》", this.artist);
+    },
+
+    PageTurning(index) {
+      this.getSingerList(this.MoreArtis.area, index);
     },
   },
 };

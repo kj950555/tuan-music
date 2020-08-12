@@ -17,4 +17,17 @@ export const mutations = {
     };
     console.log("播放歌曲 ==> ", state.ViewPlayback);
   },
+  // 更多信息
+  getMoreArtist(state,data){
+       
+   state.MoreArtis=data.valu
+   console.log(  state.MoreArtis );
+
+  }
+
+
+
+
+
+
 };

@@ -4,9 +4,9 @@ export const routes = [
     name: "Home",
     component: () => import("@/views/Home.vue"),
     beforeEnter: (to, from, next) => {
-      console.log('路由守卫to==>',to);
-      console.log('路由守卫to==>',from);
-      next()
+      console.log("路由守卫to==>", to);
+      console.log("路由守卫to==>", from);
+      next();
     },
     children: [
       // 登录
@@ -20,36 +20,43 @@ export const routes = [
         path: "/discover",
         name: "Discover",
         component: () => import("../views/discover/Discover.vue"),
-        children:[
+        children: [
           {
-          path:'/singer',
-          name:"Singer",
-          component:()=>import('../views/discover/Singer.vue')
-        },
-         
+            path: "/singer",
+            name: "Singer",
+            component: () => import("../views/discover/Singer.vue"),
+          },
+
           {
-          path:'/album',
-          name:"Album",
-          component:()=>import('../views/discover/Album.vue')
-        },
-         
+            path: "/album",
+            name: "Album",
+            component: () => import("../views/discover/Album.vue"),
+          },
+
           {
-          path:'/song',
-          name:"Song",
-          component:()=>import('../views/discover/Song.vue')
-        },
-        {
-          path:'/ranking',
-          name:'Ranking',
-          component:()=>import('../views/discover/Ranking.vue')
-        },
-        {
-          path: '*',
-          redirect: {
-            name: 'Singer'
-          }
-        }
-        ]
+            path: "/song",
+            name: "Song",
+            component: () => import("../views/discover/Song.vue"),
+          },
+          {
+            path: "/ranking",
+            name: "Ranking",
+            component: () => import("../views/discover/Ranking.vue"),
+          },
+          // 更多
+          {
+            path: "/moreartist",
+            name: "MoreArtist",
+            component: () =>
+              import("@/views/discover/particulars/MoreArtist.vue"),
+          },
+          {
+            path: "*",
+            redirect: {
+              name: "Singer",
+            },
+          },
+        ],
       },
       // 热门
       {
@@ -62,29 +69,33 @@ export const routes = [
         path: "/playlist",
         name: "Playlist",
         component: () => import("@/views/music/Playlist.vue"),
-        children:[
+        children: [
           {
-            path:'/easyman',
-            name:'Easyman',
-            component:()=> import('@/views/music/Easyman.vue')
-          }
-        ]
+            path: "/easyman",
+            name: "Easyman",
+            component: () => import("@/views/music/Easyman.vue"),
+          },
+        ],
       },
-     
     ],
-   
   },
+  // 歌手信息
+  {
+    path: "/artist",
+    name: "Artist",
+    component: () => import("@/views/discover/particulars/Artist.vue"),
+  },
+
   {
     // 搜索页面
-    path:'/search',
-    name:'Search',
-    component:()=> import('@/views/search/Search.vue')
-  
-    },
+    path: "/search",
+    name: "Search",
+    component: () => import("@/views/search/Search.vue"),
+  },
   {
-    path: '*',
+    path: "*",
     redirect: {
-      name: 'Home'
-    }
-  }
+      name: "Home",
+    },
+  },
 ];

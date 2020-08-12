@@ -21,7 +21,8 @@ import {
   Cell,
   Popup ,
   Field,
-  Toast 
+  Toast ,
+  Pagination 
 } from "vant";
 
 Vue.use(NavBar)
@@ -45,4 +46,5 @@ Vue.use(NavBar)
   .use(Popup)
   .use(Field)
   .use(Toast )
+  .use(Pagination  )
  

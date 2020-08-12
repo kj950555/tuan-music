@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <div class="showon-top"></div>
+    <!-- 顶部导航栏 -->
     <van-nav-bar @click-left="InformationPage" @click-right="Search">
       <template #title>
         <div class="navigation">
@@ -15,18 +16,24 @@
           </div>
         </div>
       </template>
+    <!-- 右边 -->
       <template #right>
         <van-icon name="search" size="18" color="#fff" />
       </template>
+      <!-- 左边 -->
       <template #left>
         <van-icon name="bars" size="18" color="#fff" />
       </template>
     </van-nav-bar>
 
+
+     <!-- 用户信息侧栏 -->
     <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round>
       <info-pages/>
     </van-popup>
-    <div class="audio">
+
+    <!-- 播放组件 -->
+    <div class="audio" v-show="PlayPart">
       <audio-view/>
     </div>
     <div class="content">
@@ -63,6 +70,7 @@ export default {
         },
       ],
       show: false,
+      PlayPart:false
     };
   },
   // 计算属性
@@ -76,6 +84,9 @@ export default {
     this.$router.push({ name: this.skip[0].naem });
     this.ActiveIem();
   },
+  mounted(){
+   this.MonitorScreen()
+  },
   methods: {
     // 解构vuex的mutatuons文件内容
     ...mapMutations(["getTheSongList"]),
@@ -86,10 +97,16 @@ export default {
         }
       }
     },
+
+    // 显示播放组件
+    MonitorScreen(){
+      window.addEventListener("touchmove" ,(e)=>{
+        // console.log(e.targetTouches[0].pageY);
+      })
+    },
     // 显示
     InformationPage() {
       this.show = true;
-      console.log("iiii", this.TheSongList[0].url);
     },
     Search() {
       this.$router.push({ name: "Search" });
