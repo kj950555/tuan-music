@@ -156,14 +156,14 @@ export default {
     }
   }
   .slide-fade-enter-active {
-    transition: all 0.25s linear;
+    transition: all 0.9s linear;
   }
   .slide-fade-leave-active {
-    transition: all 0.25s linear;
+    transition: all 0.9s linear;
   }
   .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform: rotate(30deg);
+    transform:rotateY(180deg);
     opacity: 0;
   }
   .audio {

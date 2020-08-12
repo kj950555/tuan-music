@@ -1,13 +1,9 @@
 export const routes = [
   {
-    path: "/",
+    path: "/Home",
     name: "Home",
     component: () => import("@/views/Home.vue"),
-    beforeEnter: (to, from, next) => {
-      console.log("路由守卫to==>", to);
-      console.log("路由守卫to==>", from);
-      next();
-    },
+   
     children: [
       // 登录
       {
@@ -22,30 +18,30 @@ export const routes = [
         component: () => import("../views/discover/Discover.vue"),
         children: [
           {
-            path: "/singer",
+            path: "/discover/singer",
             name: "Singer",
             component: () => import("../views/discover/Singer.vue"),
           },
 
           {
-            path: "/album",
+            path: "/discover/album",
             name: "Album",
             component: () => import("../views/discover/Album.vue"),
           },
 
           {
-            path: "/song",
+            path: "/discover/song",
             name: "Song",
             component: () => import("../views/discover/Song.vue"),
           },
           {
-            path: "/ranking",
+            path: "/discover/ranking",
             name: "Ranking",
             component: () => import("../views/discover/Ranking.vue"),
           },
           // 更多
           {
-            path: "/moreartist",
+            path: "/discover/moreartist",
             name: "MoreArtist",
             component: () =>
               import("@/views/discover/particulars/MoreArtist.vue"),
@@ -71,7 +67,7 @@ export const routes = [
         component: () => import("@/views/music/Playlist.vue"),
         children: [
           {
-            path: "/easyman",
+            path: "/playlist/easyman",
             name: "Easyman",
             component: () => import("@/views/music/Easyman.vue"),
           },

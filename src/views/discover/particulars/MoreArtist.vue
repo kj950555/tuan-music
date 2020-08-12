@@ -3,7 +3,12 @@
     <div class="artist-list">
       <van-nav-bar :left-text="MoreArtis.name" />
       <div class="artist clearfix">
-        <div class="card fl" v-for="( card, index) in artist" :key="index">
+        <div
+          class="card fl"
+          v-for="( card, index) in artist"
+          :key="index"
+          @click="DetailsSinger(card)"
+        >
           <div class="picture">
             <img class="img-scale" :src="card.img1v1Url +'?param=100y100'" alt />
           </div>
@@ -16,7 +21,7 @@
 
     <van-pagination
       v-model="MoreArtis.currentPage"
-      :page-count="12"
+      :page-count="3"
       mode="simple"
       @change="PageTurning"
     />
@@ -33,13 +38,14 @@ export default {
     next((vm) => {
       vm.axios({
         methods:"GET",
-        url:`/artist/list?type=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`
+        url:`/artist/list?offset=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`
       }).then((res)=>{
         
         vm.artist = res.data.artists
         console.log("跳转==>", vm.artist);
       });
     });
+
   },
 
   data() {
@@ -53,13 +59,22 @@ export default {
     ...mapState(["MoreArtis"]),
   },
   created() {
-    this.getSingerList(this.MoreArtis.area, 1);
+   
   },
   methods: {
+    ...mapMutations(["getSingerInformation"]),
+ // 跳转歌手详情页
+    DetailsSinger(card){
+      console.log(card);
+      this.getSingerInformation({valu:card})
+       this.$router.push({ name: 'Artist'})
+    },
+
+
     //   获取歌手
     async getSingerList(id, page) {
       const { data: res } = await this.$http.get(
-        `/artist/list?type=${page}&area=${id}&limit=30`
+        `/artist/list?type=${page}&area=${id}&linitial=b`
       );
 
       if (res.code !== 200) {
@@ -71,9 +86,10 @@ export default {
       this.artist = res.artists;
       console.log("歌手列表==》", this.artist);
     },
-
+    // 下一页
     PageTurning(index) {
-      this.getSingerList(this.MoreArtis.area, index);
+      window.scrollTo(0,0);
+      this.getSingerList(this.MoreArtis.area, this.MoreArtis.currentPage);
     },
   },
 };
@@ -103,7 +119,6 @@ export default {
       height: 30px;
       margin: 5px auto;
       color: #fff;
-
       text-overflow: ellipsis;
     }
   }

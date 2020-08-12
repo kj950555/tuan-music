@@ -3,7 +3,7 @@
     <div class="artist-list" v-for="(item ,index) in SingerClass" :key="index">
       <van-nav-bar :left-text="item.name" right-text="更多" @click-right="onClickRight(item)" />
       <div class="artist clearfix">
-        <div class="card fl" v-for="( card, index) in item.artist" :key="index">
+        <div class="card fl" v-for="( card, index) in item.artist" :key="index" @click="DetailsSinger(card)">
           <div class="picture">
             <img class="img-scale" :src="card.img1v1Url +'?param=100y100'" alt />
           </div>
@@ -39,7 +39,7 @@ export default {
     this.getInformation(this.SingerClass[4].area, 4);
   },
   methods: {
-     ...mapMutations(["getMoreArtist"]),
+     ...mapMutations(["getMoreArtist" ,"getSingerInformation"]),
     onClickRight(item) {
       this.getMoreArtist({valu:item})
       this.$router.push({ name: item.path });
@@ -49,7 +49,6 @@ export default {
       const { data: res } = await this.$http.get(
         `/artist/list?type=1&area=${id}&limit=6`
       );
-
       if (res.code !== 200) {
         return this.$notify({
           type: "primary",
@@ -59,6 +58,12 @@ export default {
       this.SingerClass[index].artist = res.artists;
       console.log(this.SingerClass);
     },
+    // 跳转歌手详情页
+    DetailsSinger(card){
+      console.log(card);
+      this.getSingerInformation({valu:card})
+       this.$router.push({ name: 'Artist'})
+    }
   },
 };
 </script>
@@ -87,7 +92,6 @@ export default {
       height: 30px;
       margin: 5px auto;
       color: #fff;
-
       text-overflow: ellipsis;
     }
   }

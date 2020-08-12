@@ -1,6 +1,5 @@
 // 上传数据到state文件缓存
 export const mutations = {
-
   getTheSongList(state, data) {
     // 歌曲列表
     state.TheSongList.unshift(data.valu);
@@ -19,12 +18,14 @@ export const mutations = {
   },
   // 更多信息
   getMoreArtist(state,data){
-       
    state.MoreArtis=data.valu
    console.log(  state.MoreArtis );
-
+  },
+  // 歌手信息
+  getSingerInformation(state,data){
+    state.SingerInformation = data.valu
+    console.log(state.SingerInformation);
   }
-
 
 
 

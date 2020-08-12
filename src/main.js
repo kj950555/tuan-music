@@ -14,12 +14,16 @@ import VueRouter from "vue-router";
 
 
 // 路由守卫
-router.beforeEach((to, from, next) => {
-  // console.log('全局守卫to==>',to);
-  // console.log('全局守卫from==>',from);
-  next()
+// router.beforeEach((to, from, next) => {
+//   // console.log('全局守卫to==>',to);
+//   // console.log('全局守卫from==>',from);
+  
+// })
+// 路由变化跳转页面回到顶部
+router.afterEach((to,from,next) => {
+  window.scrollTo(0,0);
+  
 })
-
 
 Vue.use(VueAxios, axios)
 

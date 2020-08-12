@@ -11,6 +11,8 @@ export const state = {
     id: null,
   },
   // 获取更多艺人信息
-   MoreArtis:{}
+   MoreArtis:{},
+
+   SingerInformation:{}
 
 };

@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "444234",
+      "name": "专辑，光盘",
+      "font_class": "zhuanjiguangpan",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
       "icon_id": "448450",
       "name": "播放",
       "font_class": "bofang",
@@ -13,11 +20,32 @@
       "unicode_decimal": 59053
     },
     {
-      "icon_id": "1244550",
-      "name": "分类",
-      "font_class": "fenlei",
-      "unicode": "e638",
-      "unicode_decimal": 58936
+      "icon_id": "688102",
+      "name": "视频 播放 影片",
+      "font_class": "shipinbofangyingpian",
+      "unicode": "e78f",
+      "unicode_decimal": 59279
+    },
+    {
+      "icon_id": "689261",
+      "name": "类目 品类 分类 类别.2",
+      "font_class": "leimupinleifenleileibie2",
+      "unicode": "e7f8",
+      "unicode_decimal": 59384
+    },
+    {
+      "icon_id": "1186832",
+      "name": "暂停",
+      "font_class": "zanting",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "1447738",
+      "name": "播放",
+      "font_class": "bofang1",
+      "unicode": "e618",
+      "unicode_decimal": 58904
     },
     {
       "icon_id": "2116281",
@@ -25,13 +53,6 @@
       "font_class": "love_icon",
       "unicode": "e65b",
       "unicode_decimal": 58971
-    },
-    {
-      "icon_id": "2154282",
-      "name": "循环播放_32",
-      "font_class": "xunhuanbofang",
-      "unicode": "e66c",
-      "unicode_decimal": 58988
     },
     {
       "icon_id": "3216218",
@@ -62,6 +83,13 @@
       "unicode_decimal": 58906
     },
     {
+      "icon_id": "4253494",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
       "icon_id": "5330671",
       "name": "音乐",
       "font_class": "yinle",
@@ -71,7 +99,7 @@
     {
       "icon_id": "6536736",
       "name": "播放",
-      "font_class": "bofang1",
+      "font_class": "bofang2",
       "unicode": "e667",
       "unicode_decimal": 58983
     },
