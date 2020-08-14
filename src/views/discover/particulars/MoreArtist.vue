@@ -1,7 +1,9 @@
 <template>
+  <!-- 歌手列表页 -->
   <div class="more-artist">
+    <div class="showon-top"></div>
     <div class="artist-list">
-      <van-nav-bar :left-text="MoreArtis.name" />
+      <van-nav-bar :left-text="MoreArtis.name" :left-arrow="true" @click-left="GetBack" />
       <div class="artist clearfix">
         <div
           class="card fl"
@@ -18,7 +20,6 @@
         </div>
       </div>
     </div>
-
     <van-pagination
       v-model="MoreArtis.currentPage"
       :page-count="3"
@@ -37,20 +38,20 @@ export default {
     // 路由跳转前跟新数据
     next((vm) => {
       vm.axios({
-        methods:"GET",
-        url:`/artist/list?offset=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`
-      }).then((res)=>{
-        
-        vm.artist = res.data.artists
+        methods: "GET",
+        url: `/artist/list?offset=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`,
+      }).then((res) => {
+        vm.artist = res.data.artists;
+        vm.backtrack = from.path;
         console.log("跳转==>", vm.artist);
       });
     });
-
   },
 
   data() {
     return {
       artist: [],
+      backtrack: "",
     };
   },
   // 计算属性
@@ -58,18 +59,19 @@ export default {
     //  解构vuex的state文件数据、
     ...mapState(["MoreArtis"]),
   },
-  created() {
-   
-  },
+  created() {},
   methods: {
     ...mapMutations(["getSingerInformation"]),
- // 跳转歌手详情页
-    DetailsSinger(card){
+    // 跳转歌手详情页
+    DetailsSinger(card) {
       console.log(card);
-      this.getSingerInformation({valu:card})
-       this.$router.push({ name: 'Artist'})
+      this.getSingerInformation({ valu: card });
+      this.$router.push({ name: "Artist" });
     },
-
+    // 返回
+    GetBack() {
+      this.$router.push({ path: this.backtrack });
+    },
 
     //   获取歌手
     async getSingerList(id, page) {
@@ -88,7 +90,7 @@ export default {
     },
     // 下一页
     PageTurning(index) {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
       this.getSingerList(this.MoreArtis.area, this.MoreArtis.currentPage);
     },
   },
@@ -96,31 +98,46 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.artist {
-  margin-bottom: 20px;
-  width: 100%;
-  opacity: 0.8;
-  .card {
-    padding: 5px 5px 10px;
-    margin: 15px 0px 0px 11px;
-    background-color: #1e1e1e;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: -1px -1px 5px #636363;
-    .picture {
-      width: 100px;
-      height: 100px;
-      margin: 0px auto;
+.more-artist {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #191c1e;
+  z-index: 100;
+  overflow-y: auto;
+  .artist {
+    margin-bottom: 20px;
+    width: 100%;
+    .card {
+      padding: 5px 5px 10px;
+      margin: 15px 0px 0px 11px;
+      background-color: #1e1e1e;
       overflow: hidden;
-      border-radius: 5px;
-    }
-    .name {
-      width: 100px;
-      height: 30px;
-      margin: 5px auto;
-      color: #fff;
-      text-overflow: ellipsis;
+      border-radius: 10px;
+      box-shadow: -1px -1px 5px #636363;
+      .picture {
+        width: 100px;
+        height: 100px;
+        margin: 0px auto;
+        overflow: hidden;
+        border-radius: 5px;
+      }
+      .name {
+        width: 100px;
+        height: 30px;
+        margin: 5px auto;
+        color: #fff;
+        text-overflow: ellipsis;
+      }
     }
   }
+}
+/deep/ .van-nav-bar__text {
+  color: #fff;
+}
+/deep/.van-nav-bar .van-icon {
+  color: #fff;
 }
 </style>

@@ -96,4 +96,7 @@ export default {
     }
   }
 }
+/deep/ .van-nav-bar__text{
+  color: #fff;
+}
 </style>

@@ -50,8 +50,7 @@ export default {
         border-radius: 5px;
         overflow: hidden;
         margin: 0 auto;
-        background-image: linear-gradient(-90deg, red, yellow);
-        padding: 0.5px;
+       
       }
     }
   }

@@ -29,7 +29,7 @@ Vue.use(VueAxios, axios)
 
 
 //配置请求基础路径
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "http://192.168.90.31:3000";
 //配置post请求头
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded;charset=utf-8";

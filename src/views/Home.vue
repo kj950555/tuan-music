@@ -2,7 +2,7 @@
   <div class="home">
     <div class="showon-top"></div>
     <!-- 顶部导航栏 -->
-    <van-nav-bar @click-left="InformationPage" @click-right="Search">
+    <van-nav-bar @click-left="InformationPage" @click-right="Search" :placeholder="true">
       <template #title>
         <div class="navigation">
           <div class="tab-control clearfix">
@@ -70,7 +70,7 @@ export default {
         },
       ],
       show: false,
-      PlayPart:false
+      PlayPart:true
     };
   },
   // 计算属性
@@ -131,14 +131,6 @@ export default {
 <style lang="less" scoped>
 .home {
   width: 100%;
-
-  .title {
-    text-align: center;
-    font-size: 16px;
-    color: #fff;
-    margin-top: 10px;
-  }
-
   .navigation {
     width: 200px;
     overflow: hidden;
@@ -149,29 +141,32 @@ export default {
       width: 62px;
       font-size: 14px;
       margin-top: 0;
+      color:#858577;
     }
     .active {
       font-size: 16px;
+      color: #fff;
       font-weight: 800;
     }
   }
   .slide-fade-enter-active {
-    transition: all 0.9s linear;
+    transition: all 0.25s linear;
   }
   .slide-fade-leave-active {
-    transition: all 0.9s linear;
+    transition: all 0.25s linear;
   }
   .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform:translate(-30px,-100px);
+    transform:translateX(-120px);
     opacity: 0;
+    z-index: -1;
   }
   .audio {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    z-index: 999;
+    z-index: 99;
   }
 }
 /deep/ .van-nav-bar {

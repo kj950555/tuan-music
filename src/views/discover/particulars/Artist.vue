@@ -1,4 +1,5 @@
 <template>
+<!-- 歌手详情页 -->
   <div class="artist">
     <div class="showon-top"></div>
     <!-- 导航 -->

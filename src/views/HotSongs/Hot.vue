@@ -83,6 +83,7 @@ export default {
   font-size: 16px;
   color: #fff;
   margin-top: 10px;
+  
 }
 .slideshow {
   margin-top: 20px;
@@ -90,5 +91,8 @@ export default {
 }
 .everyday {
   width: 100%;
+}
+/deep/ .van-swipe{
+  border-radius: 0px;
 }
 </style>

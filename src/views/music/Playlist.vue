@@ -1,8 +1,8 @@
 <template>
   <div class="playlist">
-    <div class="selection" @click="ShowHidden">
-      <i class="iconfont icon">&#xe638;</i>
-      <span>选择分类</span>
+    <div class="selection clearfix" @click="ShowHidden">
+      <i class="iconfont icon fl">&#xe7f8;</i>
+      <span class="fl">选择分类</span>
     </div>
     <!-- 分类 -->
     <div class="category" v-show="isActive">
@@ -21,8 +21,10 @@
         </div>
       </div>
     </div>
+    <div class="content">
+      <router-view />
+    </div>
     <!-- 分类end -->
-    <router-view/>
   </div>
 </template>
 
@@ -38,12 +40,12 @@ export default {
         { text: "情感", label: [] },
         { text: "主题", label: [] },
       ],
-      isActive: false, 
+      isActive: false,
     };
   },
   created() {
     this.getPlaylist();
-   this.$router.push({ name: 'Easyman' });
+    this.$router.push({ name: "Easyman" });
   },
   // 注册组件
   components: {
@@ -65,7 +67,6 @@ export default {
       }
       console.log(this.option);
     },
-  
 
     // 分类高亮显示
     tagActivity(index, i) {
@@ -93,18 +94,29 @@ export default {
 
 <style lang="less" scoped>
 .playlist {
+  overflow: hidden;
   .selection {
     width: 80px;
-    height: 35px;
-    line-height: 35px;
-    font-size: 10px;
-    background-color: #fc4a6b;
-    color: #fff;
+    background-color: #1d1e1e;
     border-radius: 10px;
     margin-left: 10px;
     margin-top: 5px;
+    box-shadow: -1px -1px 2px #636363;
+    padding: 5px;
+    position: absolute;
+    right: 10px;
     .icon {
-      color: #fff;
+      font-size: 18px;
+      color: #808073;
+      display: block;
+     
+    }
+    span {
+      font-size: 14px;
+      font-weight: 400;
+      color: #808073;
+      display: block;
+    
     }
   }
   .category {
@@ -133,7 +145,9 @@ export default {
       }
     }
   }
- 
+  .content{
+    margin-top: 10px;
+  }
 }
 /deep/ .van-tag {
   margin-right: 10px;
