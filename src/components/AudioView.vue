@@ -9,7 +9,11 @@
     <!-- 信息 -->
     <div class="message fl">
       <div class="song-name">
-        <van-notice-bar scrollable :text="ViewPlayback.name" background="transparent"></van-notice-bar>
+        <van-notice-bar
+          :scrollable="ViewPlayback.isSwitchover"
+          :text="ViewPlayback.name"
+          background="transparent"
+        ></van-notice-bar>
       </div>
       <div class="singer">{{ ViewPlayback.singer }}</div>
     </div>
@@ -68,7 +72,7 @@ export default {
       canvas: null,
       // 画布上下文
       ctx: null,
-      count: 500,
+      count: 300,
     };
   },
   computed: {
@@ -92,7 +96,7 @@ export default {
     // 视图信息
     // 获取音频路径{}
     async AudioPath(id) {
-      const { data: res } = await this.$http.get(`/song/url?id=${id}`);
+      const { data: res } = await this.$http.get(`/song/url?id=${id}&br=320000`);
       // console.log("音频路径", res);
       this.audio.src = res.data[0].url;
       this.audio.play();
@@ -131,8 +135,10 @@ export default {
       this.ctx = this.canvas.getContext("2d");
       // 监听是否播放完毕歌曲
       this.audio.addEventListener("pause", () => {
-        console.log("当前歌曲播放完毕");
+        console.log("歌曲暂停了");
+
         if (this.audio.ended) {
+          this.eliminate(this.timer);
           console.log("下一首");
           this.NextOneHome();
         }
@@ -146,8 +152,7 @@ export default {
           this.music.currentTime = this.audio.duration;
           //  转换时间
           this.music.maxTime = this.RunningTime(this.music.currentTime);
-          // console.log("时间==》", this.music.maxTime);
-           
+
           // 2.0 console.log("连接音源==>", audioSrc);
           let analyser = audioCtx.createAnalyser();
           // console.log("关联分析器==>", analyser);
@@ -155,27 +160,36 @@ export default {
           audioSrc.connect(analyser);
           // 输出的目标：将分析机分析出来的处理结果与目标点（耳机/扬声器）连接
           analyser.connect(audioCtx.destination);
-          this.voiceHeight = new Uint8Array(analyser.frequencyBinCount);
+          this.voiceHeight = new Uint8Array(analyser.frequencyBinCount*2);
 
-
-          let step = Math.round(this.voiceHeight.length / this.count);
-          console.log(this.voiceHeight.length, "数值");
-          // 定时器
+          // console.log(this.voiceHeight.length, "数值");
+          // 定时器==========================================
           this.timer = setInterval(() => {
             analyser.getByteFrequencyData(this.voiceHeight);
-            console.log(this.voiceHeight)
+            // 自定义获取数组里边数据的频步
+            var step = Math.round(this.voiceHeight.length / this.count);
+            // 清除画布
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            for (var i = 0; i < this.minW; i++) {
-              // var audioHeight = this.voiceHeight[step * i];
-              this.ctx.beginPath();
-              this.ctx.moveTo(i, this.canvas.height);
-              this.ctx.lineTo(
-                i,
-                this.canvas.height - this.bounce(this.voiceHeight[i])
+
+            this.ctx.beginPath();
+            // this.ctx.strokeStyle = "#fff";
+            this.ctx.lineWidth = 1;
+            var x = 0;
+            var grd = this.ctx.createLinearGradient(0, 0, 170, 0);
+            grd.addColorStop(0, "#FFCC00");
+            grd.addColorStop(0.25, "#BA5656");
+            grd.addColorStop(0.5, "#C46CB7");
+            grd.addColorStop(0.75, "#41B883");
+            grd.addColorStop(1, "#007ACC");
+            for (let i = 0; i < this.count; i++) {
+              var audioHeight = this.voiceHeight[step * i];
+              this.ctx.fillStyle = grd;
+              this.ctx.fillRect(
+                 i * 5,
+                this.canvas.height,
+                5,
+               this.canvas.height-audioHeight
               );
-              this.ctx.lineWidth = 2;
-              this.ctx.strokeStyle = "#1E88DA";
-              this.ctx.stroke();
             }
 
             // console.log(audioHeight);

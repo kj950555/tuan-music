@@ -1,3 +1,5 @@
+
+
 // 上传数据到state文件缓存
 export const mutations = {
   getTheSongList(state, data) {
@@ -14,7 +16,8 @@ export const mutations = {
       image: data.valu.image,
       isSwitchover: true,
       id: data.valu.id,
-    };
+    }
+    state.PlayPart = true;
     console.log("播放歌曲 ==> ", state.ViewPlayback);
   },
   // 更多信息
@@ -27,8 +30,12 @@ export const mutations = {
     state.SingerInformation = data.valu
     console.log(state.SingerInformation);
   },
-
-
+  
+  // 是否显示播放插件
+  Displayplayer(state,data){
+  console.log('关闭====》',data);
+    state.PlayPart=data.valu  
+  }
 
 
 };

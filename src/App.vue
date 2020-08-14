@@ -79,7 +79,7 @@ p {
 }
 .showon-top {
   width: 100%;
-  height: 30px;
+  height: 0px;
   background-color: #24262b;
 }
 .slide-right {

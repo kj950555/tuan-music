@@ -31,7 +31,6 @@ export default {
       discover: [],
     };
   },
-  
   created() {
     console.log('1111');
     // 获取轮播图资源
@@ -39,7 +38,6 @@ export default {
     // 获取发现
     this.getDiscover();
   },
-
   components: {
     // 注册组件
     Indicator,

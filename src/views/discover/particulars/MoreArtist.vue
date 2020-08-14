@@ -45,6 +45,7 @@ export default {
         vm.backtrack = from.path;
         console.log("跳转==>", vm.artist);
       });
+      vm.Displayplayer({valu:false})
     });
   },
 
@@ -61,7 +62,7 @@ export default {
   },
   created() {},
   methods: {
-    ...mapMutations(["getSingerInformation"]),
+    ...mapMutations(["getSingerInformation",'Displayplayer']),
     // 跳转歌手详情页
     DetailsSinger(card) {
       console.log(card);

@@ -90,6 +90,7 @@ export default {
         .catch((err) => {
           console.log(err);
         });
+        vm.Displayplayer({valu:false})
     });
   },
   data() {
@@ -111,7 +112,7 @@ export default {
   },
   methods: {
        // 解构vuex的mutations.js文件的事件
-    ...mapMutations(["getTheSongList" ,"changeCurrentList"]),
+    ...mapMutations(["getTheSongList" ,"changeCurrentList",'Displayplayer']),
     Backtrack() {
       console.log(this.backtrack);
       this.$router.push({ path: this.backtrack });

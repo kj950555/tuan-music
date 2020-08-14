@@ -1,34 +1,55 @@
 <template>
   <div class="search">
     <div class="showon-top"></div>
-
     <div class="topnav clearfix">
       <div class="fl back">
-        <van-icon name="arrow-left" color="#fff" size='18px' />
+        <van-icon name="arrow-left" color="#fff" size="25px" @click="Backtrack" />
       </div>
       <div class="fr search-box">
-        <van-field right-icon="search" placeholder="搜索音乐，歌词" @click-right-icon="SearchResult" />
+        <van-field right-icon="search" placeholder="搜索音乐，歌词"   @click-right-icon="SearchResult" />
       </div>
     </div>
-  
+   <div>
+
+   </div>
+
+
+
 
   </div>
 </template>
 
 <script>
 export default {
-  created(){
-    this.HotSearch()
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      vm.backtrack = from.path;
+      console.log(vm.backtrack);
+    });
   },
-  methods:{
-    SearchResult(){
+  data() {
+    return {
+      backtrack: "",
 
+    };
+  },
+
+  created() {
+    this.HotSearch();
+  },
+  methods: {
+    SearchResult() {
+      console.log('111');
     },
-    async HotSearch(){
-      const{data:res} = await this.$http.get('/search/hot')
+    async HotSearch() {
+      const { data: res } = await this.$http.get("/search/hot");
       console.log(res);
-    }
-  }
+    },
+     Backtrack() {
+      console.log(this.backtrack);
+      this.$router.push({ path: this.backtrack });
+    },
+  },
 };
 </script>
 
@@ -36,20 +57,31 @@ export default {
 .topnav {
   width: 100%;
   height: 46px;
-  background-color: #191C1E;
-  .back{
+  background-color: #191c1e;
+  .back {
     width: 50px;
-    height: 46px;
     text-align: center;
-    line-height: 46px;
+    margin-top: 20px;
   }
   .search-box {
     width: 300px;
     border-radius: 23px;
     overflow: hidden;
-    height: 40px;
-    margin: 3px 5px;
-    background-color: #a82828;
+    height: 32px;
+    margin-top: 18px;
+    margin-right: 15px;
+
   }
+}
+/deep/.van-cell{
+  padding: 4px 10px;
+  background-color:#858585 ;
+  color: #fff;
+}
+/deep/.van-field__control{
+  color: #fff;
+}
+/deep/.van-field__right-icon{
+  color: #fff;
 }
 </style>

@@ -11,6 +11,7 @@
         </div>
       </div>
     </div>
+    
    <grid-show v-for="(imen,index) in hotPlaylist" :key="index" :title='imen.name' :songlists='imen.songlists' />
 
   </div>
@@ -19,7 +20,6 @@
 <script>
 import GridShow from "@/components/GridShow";
 export default {
-
   data() {
     return {
       playlists: [],
@@ -38,10 +38,7 @@ export default {
     for(let i =0;i<this.hotPlaylist.length;i++){
       this.getHotname(this.hotPlaylist[i].name,i);
     }
-    
   },
-
- 
   // 注册组件
   components: {
     GridShow,

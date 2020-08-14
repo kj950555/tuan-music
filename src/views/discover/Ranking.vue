@@ -37,12 +37,8 @@ export default {
     },
   LeaderboardContent(imet){
     this.axios({
-      
     })
-
   }
-
-
   },
 };
 </script>

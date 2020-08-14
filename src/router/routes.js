@@ -84,6 +84,11 @@ export const routes = [
             name: "Easyman",
             component: () => import("@/views/music/Easyman.vue"),
           },
+          {
+            path: "/playlist/player",
+            name: "Player",
+            component: () => import('../views/music/Player.vue'),
+          }
         ],
       },
     ],

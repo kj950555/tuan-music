@@ -16,7 +16,7 @@
           </div>
         </div>
       </template>
-    <!-- 右边 -->
+      <!-- 右边 -->
       <template #right>
         <van-icon name="search" size="18" color="#fff" />
       </template>
@@ -26,19 +26,20 @@
       </template>
     </van-nav-bar>
 
-
-     <!-- 用户信息侧栏 -->
+    <!-- 用户信息侧栏 -->
     <van-popup v-model="show" position="left" :style="{ height: '100%' ,width:'80%'}" round>
-      <info-pages/>
+      <info-pages />
     </van-popup>
 
     <!-- 播放组件 -->
     <div class="audio" v-show="PlayPart">
-      <audio-view/>
-    </div>
-    <div class="content">
       <transition name="slide-fade">
-        <router-view/>
+        <audio-view />
+      </transition>
+    </div>
+    <div :class="PlayPart? 'content-active':'content'">
+      <transition name="slide-fade">
+        <router-view />
       </transition>
     </div>
   </div>
@@ -70,11 +71,13 @@ export default {
         },
       ],
       show: false,
-      PlayPart:true
     };
   },
   // 计算属性
- 
+  computed: {
+    //  解构vuex的state文件数据、
+    ...mapState(["PlayPart"]),
+  },
   // 注册组件
   components: {
     InfoPages,
@@ -84,8 +87,8 @@ export default {
     this.$router.push({ name: this.skip[0].naem });
     this.ActiveIem();
   },
-  mounted(){
-   this.MonitorScreen()
+  mounted() {
+    this.MonitorScreen();
   },
   methods: {
     // 解构vuex的mutatuons文件内容
@@ -99,10 +102,10 @@ export default {
     },
 
     // 显示播放组件
-    MonitorScreen(){
-      window.addEventListener("touchmove" ,(e)=>{
+    MonitorScreen() {
+      window.addEventListener("touchmove", (e) => {
         // console.log(e.targetTouches[0].pageY);
-      })
+      });
     },
     // 显示
     InformationPage() {
@@ -141,7 +144,7 @@ export default {
       width: 62px;
       font-size: 14px;
       margin-top: 0;
-      color:#858577;
+      color: #858577;
     }
     .active {
       font-size: 16px;
@@ -149,6 +152,23 @@ export default {
       font-weight: 800;
     }
   }
+  .content {
+    position: fixed;
+    top: 46px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+  .content-active {
+    position: fixed;
+    top: 46px;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+  }
+
   .slide-fade-enter-active {
     transition: all 0.25s linear;
   }
@@ -157,7 +177,7 @@ export default {
   }
   .slide-fade-enter, .slide-fade-leave-to
 /* .slide-fade-leave-active for below version 2.1.8 */ {
-    transform:translateX(-120px);
+    transform: translateX(-120px);
     opacity: 0;
     z-index: -1;
   }
@@ -186,5 +206,8 @@ export default {
 }
 /deep/ .van-popup {
   background: #f5f5f7;
+}
+/deep/ .van-nav-bar{
+   z-index: 0;
 }
 </style>
