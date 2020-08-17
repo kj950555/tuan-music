@@ -3,8 +3,8 @@
     <!-- 进度条 -->
     <div class="schedule" ref="schedule"></div>
     <!-- 图片 -->
-    <div class="picture fl">
-      <img class="img-scale" :src="ViewPlayback.image" alt />
+    <div class="picture fl" @click="SkipPlayer">
+      <img class="img-scale" :src="ViewPlayback.image+'?param=70y70'" alt />
     </div>
     <!-- 信息 -->
     <div class="message fl">
@@ -92,11 +92,11 @@ export default {
   },
   methods: {
     // 解构mapMutations文件
-    ...mapMutations(["getTheSongList", "changeCurrentList"]),
+    ...mapMutations(["getTheSongList", "changeCurrentList","Displayplayer",'getMusicCurrentTime']),
     // 视图信息
     // 获取音频路径{}
     async AudioPath(id) {
-      const { data: res } = await this.$http.get(`/song/url?id=${id}&br=320000`);
+      const { data: res } = await this.$http.get(`/song/url?id=${id}`);
       // console.log("音频路径", res);
       this.audio.src = res.data[0].url;
       this.audio.play();
@@ -193,7 +193,10 @@ export default {
             }
 
             // console.log(audioHeight);
+
             this.music.minTime = this.RunningTime(this.audio.currentTime);
+            // 传输当前时间
+            this.getMusicCurrentTime({valu:this.audio.currentTime})
             // console.log("当前时间==》", this.music.minTime);
             this.music.step = this.dragMoove(
               this.audio.currentTime,
@@ -296,6 +299,11 @@ export default {
       this.PlayMessage(this.serialNumber);
       console.log("视图信息", this.TheSongList.length);
     },
+    // 跳转页面
+    SkipPlayer(){
+      this.Displayplayer({valu:false})
+      this.$router.push({ name: 'Player' });
+    }
   },
 };
 </script>
@@ -364,6 +372,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
+    opacity: 0.5;
   }
 }
 /deep/ .van-notice-bar {

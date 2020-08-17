@@ -32,13 +32,6 @@ export default {};
           border-radius: 50%;
           background-color: #F86C4D;
       }
-
-
-
-
-
-
-
       
   }
 }

@@ -68,6 +68,12 @@ export const routes = [
         name: "Hot",
         component: () => import("@/views/HotSongs/Hot.vue"),
       },
+      // 音乐播放页面
+      {
+        path: "/playlist/player",
+        name: "Player",
+        component: () => import('../views/music/Player.vue'),
+      },
       {
         path: "/artist",
         name: "Artist",
@@ -85,12 +91,20 @@ export const routes = [
             component: () => import("@/views/music/Easyman.vue"),
           },
           {
-            path: "/playlist/player",
-            name: "Player",
-            component: () => import('../views/music/Player.vue'),
-          }
+            path:'/playlist/category',
+            name:"Category",
+            component:()=>import('../views/music/SongSheet/Category.vue')
+          },
+         
+         
         ],
       },
+       // 歌单详情页
+       {
+        path:'/playlist/songdetails',
+        name:"SongDetails",
+        component:()=>import('../views/music/SongSheet/SongDetails.vue')
+      }
     ],
   },
 

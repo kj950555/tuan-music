@@ -10,12 +10,7 @@
       </div>
     </div>
    <div>
-
    </div>
-
-
-
-
   </div>
 </template>
 
@@ -23,14 +18,12 @@
 export default {
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      vm.backtrack = from.path;
-      console.log(vm.backtrack);
+     
     });
   },
   data() {
     return {
-      backtrack: "",
-
+    
     };
   },
 
@@ -46,8 +39,7 @@ export default {
       console.log(res);
     },
      Backtrack() {
-      console.log(this.backtrack);
-      this.$router.push({ path: this.backtrack });
+    this.$router.go(-1)
     },
   },
 };

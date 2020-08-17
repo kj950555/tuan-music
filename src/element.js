@@ -22,7 +22,8 @@ import {
   Popup ,
   Field,
   Toast ,
-  Pagination 
+  Pagination,
+  Circle  
 } from "vant";
 
 Vue.use(NavBar)
@@ -46,5 +47,6 @@ Vue.use(NavBar)
   .use(Popup)
   .use(Field)
   .use(Toast )
-  .use(Pagination  )
+  .use(Pagination)
+  .use(Circle)
  

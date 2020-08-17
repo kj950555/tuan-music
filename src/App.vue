@@ -47,7 +47,7 @@ p {
 }
 .img-scale {
   width: 100%;
-  height: 100%;
+ 
   display: block;
 }
 .fl {
@@ -75,7 +75,6 @@ p {
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #575b62;
 }
 .showon-top {
   width: 100%;

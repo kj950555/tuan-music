@@ -136,7 +136,7 @@ export default {
         valu: {
           name: imen.album.name,
           singer: imen.artists[0].name,
-          image: imen.album.picUrl + "?param=70y70",
+          image: imen.album.picUrl ,
           id: imen.id,
         },
       });
@@ -144,7 +144,7 @@ export default {
         valu: {
           name: imen.album.name,
           singer: imen.artists[0].name,
-          image: imen.album.picUrl + "?param=70y70",
+          image: imen.album.picUrl ,
           id: imen.id,
         },
       });

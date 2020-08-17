@@ -1,6 +1,6 @@
 <template>
     <div>
-播放列表组件
+    歌单分类
     </div>
 </template>
 

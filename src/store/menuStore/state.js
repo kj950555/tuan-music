@@ -12,8 +12,12 @@ export const state = {
   },
   // 获取更多艺人信息
    MoreArtis:{},
+  //  艺人信息
    SingerInformation:{},
    // 判断是否显示小播放插件
    PlayPart:false,
- 
+  // 歌单号码
+  SongListID:0,
+  // 歌曲当前时间
+  MusicCurrentTim:0
 };

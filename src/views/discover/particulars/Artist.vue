@@ -65,7 +65,7 @@ export default {
   // 路由跳转前跟新数据
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-      vm.backtrack = from.path;
+     
       vm.axios({
         methods: "GET",
         url: `/artist/top/song?id=${vm.SingerInformation.id}`,
@@ -96,7 +96,7 @@ export default {
   data() {
     return {
       active: 0,
-      backtrack: "",
+     
       PlayPart: false,
       correlation: [
         { option: "单曲", icon: "&#xe7b8;", content: [] },
@@ -114,8 +114,7 @@ export default {
        // 解构vuex的mutations.js文件的事件
     ...mapMutations(["getTheSongList" ,"changeCurrentList",'Displayplayer']),
     Backtrack() {
-      console.log(this.backtrack);
-      this.$router.push({ path: this.backtrack });
+      this.$router.go(-1);
     },
     PlayBack(item){
         console.log(item);
@@ -123,7 +122,7 @@ export default {
         valu: {
           name: item.name,
           singer: item.ar[0].name,
-          image: item.al.picUrl + "?param=70y70",
+          image: item.al.picUrl ,
           id: item.id,
         },
       });
@@ -131,7 +130,7 @@ export default {
     this.changeCurrentList({valu: {
           name: item.name,
           singer: item.ar[0].name,
-          image: item.al.picUrl + "?param=70y70",
+          image: item.al.picUrl ,
           id: item.id,
         },})
     }

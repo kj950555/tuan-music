@@ -42,7 +42,7 @@ export default {
         url: `/artist/list?offset=${vm.MoreArtis.currentPage}&area=${vm.MoreArtis.area}&limit=30`,
       }).then((res) => {
         vm.artist = res.data.artists;
-        vm.backtrack = from.path;
+       
         console.log("跳转==>", vm.artist);
       });
       vm.Displayplayer({valu:false})
@@ -52,7 +52,7 @@ export default {
   data() {
     return {
       artist: [],
-      backtrack: "",
+     
     };
   },
   // 计算属性
@@ -71,7 +71,7 @@ export default {
     },
     // 返回
     GetBack() {
-      this.$router.push({ path: this.backtrack });
+      this.$router.go(-1)
     },
 
     //   获取歌手
