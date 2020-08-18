@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     //  解构vuex的state文件数据、
-    ...mapState(["TheSongList", "ViewPlayback"]),
+    ...mapState(["TheSongList", "ViewPlayback","MusicCurrentTim"]),
   },
 
   watch: {
@@ -92,7 +92,13 @@ export default {
   },
   methods: {
     // 解构mapMutations文件
-    ...mapMutations(["getTheSongList", "changeCurrentList","Displayplayer",'getMusicCurrentTime']),
+    ...mapMutations([
+      "getTheSongList",
+      "changeCurrentList",
+      "Displayplayer",
+      "getMusicCurrentTime",
+      "playTheSong"
+    ]),
     // 视图信息
     // 获取音频路径{}
     async AudioPath(id) {
@@ -136,7 +142,6 @@ export default {
       // 监听是否播放完毕歌曲
       this.audio.addEventListener("pause", () => {
         console.log("歌曲暂停了");
-
         if (this.audio.ended) {
           this.eliminate(this.timer);
           console.log("下一首");
@@ -148,6 +153,7 @@ export default {
       this.audio.addEventListener("loadeddata", () => {
         // 判断是否播放歌曲
         if (this.audio.play) {
+          this.audio.currentTime = this.MusicCurrentTim.currentTime;
           //  获取歌曲长度
           this.music.currentTime = this.audio.duration;
           //  转换时间
@@ -160,7 +166,7 @@ export default {
           audioSrc.connect(analyser);
           // 输出的目标：将分析机分析出来的处理结果与目标点（耳机/扬声器）连接
           analyser.connect(audioCtx.destination);
-          this.voiceHeight = new Uint8Array(analyser.frequencyBinCount*2);
+          this.voiceHeight = new Uint8Array(analyser.frequencyBinCount * 2);
 
           // console.log(this.voiceHeight.length, "数值");
           // 定时器==========================================
@@ -170,7 +176,6 @@ export default {
             var step = Math.round(this.voiceHeight.length / this.count);
             // 清除画布
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
             this.ctx.beginPath();
             // this.ctx.strokeStyle = "#fff";
             this.ctx.lineWidth = 1;
@@ -185,24 +190,19 @@ export default {
               var audioHeight = this.voiceHeight[step * i];
               this.ctx.fillStyle = grd;
               this.ctx.fillRect(
-                 i * 5,
+                i * 5,
                 this.canvas.height,
                 5,
-               this.canvas.height-audioHeight
+                this.canvas.height - audioHeight
               );
             }
-
             // console.log(audioHeight);
-
             this.music.minTime = this.RunningTime(this.audio.currentTime);
-            // 传输当前时间
-            this.getMusicCurrentTime({valu:this.audio.currentTime})
             // console.log("当前时间==》", this.music.minTime);
             this.music.step = this.dragMoove(
               this.audio.currentTime,
               this.audio.duration
             );
-
             //  进度条
             this.music.schedule.style.width =
               this.minW * (this.music.step / 100) + "px";
@@ -300,10 +300,21 @@ export default {
       console.log("视图信息", this.TheSongList.length);
     },
     // 跳转页面
-    SkipPlayer(){
-      this.Displayplayer({valu:false})
-      this.$router.push({ name: 'Player' });
-    }
+    SkipPlayer() {
+      this.Displayplayer({ valu: false });
+      this.$router.push({ name: "Player" });
+      this.playTheSong({valu:this.ViewPlayback})
+      // 传输当前时间
+      this.getMusicCurrentTime({
+        valu: {
+          Time: this.audio.currentTime,
+          url: this.audio.src,
+          index: this.serialNumber,
+        },
+      });
+      this.eliminate(this.timer);
+       this.audio.pause();
+    },
   },
 };
 </script>

@@ -65,7 +65,6 @@ export default {
   // 路由跳转前跟新数据
   beforeRouteEnter(to, from, next) {
     next((vm) => {
-     
       vm.axios({
         methods: "GET",
         url: `/artist/top/song?id=${vm.SingerInformation.id}`,
@@ -96,7 +95,6 @@ export default {
   data() {
     return {
       active: 0,
-     
       PlayPart: false,
       correlation: [
         { option: "单曲", icon: "&#xe7b8;", content: [] },
@@ -104,7 +102,6 @@ export default {
       ],
     };
   },
-
   // 计算属性
   computed: {
     //  解构vuex的state文件数据、
@@ -133,6 +130,7 @@ export default {
           image: item.al.picUrl ,
           id: item.id,
         },})
+        this.Displayplayer({valu:true})
     }
   },
 };

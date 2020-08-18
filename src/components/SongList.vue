@@ -56,6 +56,7 @@ export default {
           id: this.id,
         },
       });
+      this.Displayplayer({valu:false})
     },
   },
 };

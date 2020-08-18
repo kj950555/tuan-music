@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     // 解构vuex的mutations.js文件的事件
-    ...mapMutations(["getTheSongList", "changeCurrentList"]),
+    ...mapMutations(["getTheSongList", "changeCurrentList" ,'Displayplayer']),
     //   获取最新歌曲
     async getAccessSong(id, index, access) {
       // 判断是不是获取到数据了，如果获取到了就return
@@ -148,6 +148,7 @@ export default {
           id: imen.id,
         },
       });
+      this.Displayplayer({valu:true})
     },
 
     // 加载数据

@@ -114,10 +114,12 @@ export default {
           name: res.songs[0].name,
           image: res.songs[0].al.picUrl,
           singer: res.songs[0].ar[0].name,
-          id:this.Playlist.trackIds[i].id
+          id:this.Playlist.trackIds[i].id,
         });
       }
        this.getPlayAll({valu:this.songData})
+      //  是否显示播放插件
+       this.Displayplayer({valu:false})
       console.log("数据==》", this.songData);
     },
     // 播放全部
